@@ -16,11 +16,11 @@
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
-    <li><a href="index.html" class="active">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC-Simulator</a></li>
-    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
-    <li><a href="quiz.html">📝 Prüfung</a></li>
-    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+    <li><a href="index.html" class="active">Startseite</a></li>
+    <li><a href="pc.html">💻 Laptop (Windows 11)</a></li>
+    <li><a href="tablet.html">📱 Tablet (GoodNotes &amp; Android)</a></li>
+    <li><a href="quiz.html?track=pc">📝 Prüfung Laptop</a></li>
+    <li><a href="quiz.html?track=tablet">📝 Prüfung Tablet</a></li>
   </ul>
 </nav>
 
@@ -29,13 +29,13 @@
     <img src="assets/logo.png" alt="Amy Johnson Gymnasium Logo" class="hero-logo">
   </div>
   <h1>Digitaler <span class="accent">Führerschein</span></h1>
-  <p>Lerne, dein digitales Gerät (Laptop oder Tablet) verantwortungsvoll und rechtssicher in der Oberstufe einzusetzen. Mit echtem Dateimanager- &amp; Notizen-Simulator!</p>
+  <p>Die offizielle Qualifizierungsplattform des Amy Johnson Gymnasiums für die Nutzung digitaler Endgeräte im Unterricht. Wähle dein Gerät und starte deinen Lernpfad:</p>
   <div class="badge-row">
-    <span class="badge">📚 Oberstufe (Sek II)</span>
-    <span class="badge">💻 Windows 11 Explorer &amp; CLI</span>
-    <span class="badge">📱 GoodNotes &amp; Samsung Notes</span>
-    <span class="badge">🔐 Zugangscode-Test</span>
-    <span class="badge">🏆 Gültig Schuljahr 2026</span>
+    <span class="badge">🏫 Amy Johnson Gymnasium</span>
+    <span class="badge">💻 Laptop-Lernpfad</span>
+    <span class="badge">📱 Tablet-Lernpfad</span>
+    <span class="badge">🔒 Geschützte Prüfung mit Zugangscode</span>
+    <span class="badge">📜 Verifiziertes Zertifikat</span>
   </div>
 </section>
 
@@ -43,95 +43,102 @@
   <div class="device-grid">
     <a href="pc.html" class="device-card fade-up">
       <div class="device-icon">💻</div>
-      <h2>PC / Laptop (Windows 11)</h2>
-      <p>Inklusive <strong>interaktivem Datei-Explorer &amp; Live-PowerShell</strong>! Ordnerstruktur anlegen, Dateien regelkonform umbenennen und Cloud-Sync üben.</p>
+      <h2>Laptop / PC (Windows 11)</h2>
+      <p>Lerne die 3 Kernbereiche: Anständige Nutzung ohne Missbrauch, Strukturierung im Dateimanager mit Praxis-Simulator sowie Tipps &amp; Tricks für den Schulalltag.</p>
       <div class="tag-list">
-        <span class="tag">Interaktive Quests</span>
-        <span class="tag">Windows 11 Explorer</span>
-        <span class="tag">Live-CLI / PowerShell</span>
-        <span class="tag">Reizreduktion &amp; Fokus</span>
+        <span class="tag">3 Lektionen</span>
+        <span class="tag">Dateimanager-Simulator</span>
+        <span class="tag">Fokus-Hacks</span>
+        <span class="tag">Abschlussprüfung</span>
       </div>
-      <span class="btn btn-primary">PC-Modul &amp; Simulator &rarr;</span>
+      <span class="btn btn-primary">Lernpfad Laptop starten &rarr;</span>
     </a>
     <a href="tablet.html" class="device-card fade-up" style="animation-delay:.15s">
       <div class="device-icon">📱</div>
-      <h2>Tablet (iPad &amp; Samsung)</h2>
-      <p>Mit <strong>interaktivem Notizen- &amp; Zeichensimulator</strong>! Fächer-Hefte anlegen, PDF-Arbeitsblätter digital annotieren und Tafelbild-Recht erlernen.</p>
+      <h2>Tablet (iPad &amp; Android)</h2>
+      <p>Lerne die 3 Kernbereiche: Flach-Leg-Regel &amp; AirDrop-Kodex, Fächerordner in GoodNotes / Samsung Notes sortieren sowie Tafelbild-Recht &amp; Reizunterdrückung.</p>
       <div class="tag-list">
-        <span class="tag">GoodNotes 6 (iPad)</span>
-        <span class="tag">Samsung Notes (Android)</span>
-        <span class="tag">Interaktiver Pen-Canvas</span>
-        <span class="tag">Tafelrecht &amp; Verhaltenskodex</span>
+        <span class="tag">3 Lektionen</span>
+        <span class="tag">GoodNotes-Ordner-Manager</span>
+        <span class="tag">Tafelrecht</span>
+        <span class="tag">Abschlussprüfung</span>
       </div>
-      <span class="btn btn-primary">Tablet-Modul &amp; Simulator &rarr;</span>
+      <span class="btn btn-primary">Lernpfad Tablet starten &rarr;</span>
     </a>
   </div>
 </section>
 
-<!-- HIGHLIGHT: INTERAKTIVE SIMULATION VORSCHAU -->
-<section style="max-width:960px;margin:0 auto 3.5rem;padding:0 1.5rem;">
-  <div style="background:#fff;border-radius:18px;border:1px solid var(--border);padding:2rem;box-shadow:var(--shadow);">
-    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
-      <div>
-        <h2 style="color:var(--primary);font-size:1.4rem;font-weight:800;margin-bottom:0.25rem;">✨ Interaktive Praxis-Umgebung</h2>
-        <p style="color:var(--text-sec);font-size:0.92rem;">Direkt ausprobieren statt nur Theorie lesen: Wie bei interaktiven Coding-Apps wird jede Aufgabe live im Browser geprüft!</p>
-      </div>
-      <a href="pc.html" class="btn btn-accent">Direkt zum Datei-Simulator &rarr;</a>
+<!-- DIE DREI SÄULEN -->
+<section style="max-width:980px;margin:0 auto 4rem;padding:0 1.5rem;">
+  <div style="text-align:center;margin-bottom:2.5rem;">
+    <h2 class="section-title">Die 3 Säulen des Digitalen Führerscheins</h2>
+    <p class="section-sub">Einheitliche Standards für alle Schülerinnen und Schüler des Amy Johnson Gymnasiums</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;">
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;box-shadow:var(--shadow-sm);">
+      <div style="font-size:2.2rem;margin-bottom:.8rem;">🛡️</div>
+      <h3 style="color:var(--primary);font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">1. Anständige Nutzung ohne Missbrauch</h3>
+      <p style="font-size:.9rem;color:var(--text-sec);line-height:1.7;">Regeln für den Unterricht: Keine heimlichen Foto- oder Tonaufnahmen (§ 201a StGB), "Deckel halb zu" bzw. "Tablets flach" bei Erklärungen und Respekt im Schulnetzwerk.</p>
     </div>
-    
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
-      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
-        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🗂️</div>
-        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Simulierter Datei-Explorer</h3>
-        <p style="font-size:0.83rem;color:var(--text-sec);">Erstelle echte Ordner wie <code>Schule/2026/Mathematik</code>, benenne Dateien um und sortiere Hausarbeiten.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
-        <div style="font-size:1.8rem;margin-bottom:0.4rem;">💻</div>
-        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Eingebaute Live-CLI</h3>
-        <p style="font-size:0.83rem;color:var(--text-sec);">Tippe echte Befehle wie <code>mkdir</code>, <code>mv</code> oder <code>ls</code> in das integrierte Terminal.</p>
-      </div>
-      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
-        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🖊️</div>
-        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Tablet-Canvas Mitschriften</h3>
-        <p style="font-size:0.83rem;color:var(--text-sec);">Übe Stiftwerkzeuge, Textmarker und PDF-Annotation wie in GoodNotes oder Samsung Notes.</p>
-      </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;box-shadow:var(--shadow-sm);">
+      <div style="font-size:2.2rem;margin-bottom:.8rem;">📂</div>
+      <h3 style="color:var(--primary);font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">2. Organisieren des Gerätes</h3>
+      <p style="font-size:.9rem;color:var(--text-sec);line-height:1.7;">Einheitliche Ordnerhierarchien (Schule > Schuljahr > Fächer), standardisierte Dateinamen (<code>JAHR-MONAT-TAG_Fach_Thema</code>) und GoodNotes-Ordner statt Zettelwirtschaft.</p>
+    </div>
+
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--r);padding:1.8rem;box-shadow:var(--shadow-sm);">
+      <div style="font-size:2.2rem;margin-bottom:.8rem;">💡</div>
+      <h3 style="color:var(--primary);font-size:1.15rem;font-weight:800;margin-bottom:.5rem;">3. Tipps, Hacks &amp; Reizunterdrückung</h3>
+      <p style="font-size:.9rem;color:var(--text-sec);line-height:1.7;">Private Apps sind auf dem Gerät erlaubt, aber im Unterricht tabu. Wie du Fokus-Profile einrichtest, Tafelbilder rechtssicher erfasst und Akku sparst.</p>
     </div>
   </div>
 </section>
 
-<!-- REGELN & VERLOCKUNG VORSCHAU -->
-<section style="background:#fff;padding:3.5rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
-  <div style="max-width:960px;margin:0 auto;text-align:center;">
-    <h2 class="section-title">Klare Regeln &amp; Reizunterdrückung</h2>
-    <p class="section-sub">Private Apps sind auf deinem Gerät erlaubt – im Unterricht herrschen jedoch klare Spielregeln.</p>
+<!-- DER WEG ZUM ZERTIFIKAT -->
+<section style="background:#fff;padding:4rem 1.5rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:880px;margin:0 auto;text-align:center;">
+    <h2 class="section-title">Geschützte Abschlussprüfung mit Zugangscode</h2>
+    <p class="section-sub" style="max-width:620px;margin:0 auto 2.2rem;">Das offizielle Führerschein-Zertifikat ist nicht frei zugänglich. Schüler müssen nach Durcharbeiten der Lektionen den Lehrkraft-Code eingeben und die 10 Fachfragen bestehen (min. 70%).</p>
     
-    <div class="rules-grid" style="text-align:left;">
-      <div class="rule-box permit">
-        <h3>✅ Das ist gestattet</h3>
-        <p>Du darfst private Apps (Spotify, Steam, Discord, Instagram) auf deinem privaten Gerät installiert haben.</p>
-        <p style="font-size:0.82rem;color:var(--text-light);">Das Gerät gehört dir – eine vollständige Entprivatisierung verlangt die Schule nicht.</p>
-      </div>
-      <div class="rule-box forbid">
-        <h3>🚫 Das gilt während der Schulzeit</h3>
-        <p>Sobald der Unterricht beginnt, sind alle privaten Apps, Spiele und Benachrichtigungen absolut tabu.</p>
-        <p style="font-size:0.82rem;color:var(--text-light);">Nutzung privater Medien führt zum sofortigen Entzug der Unterrichtserlaubnis.</p>
-      </div>
-      <div class="rule-box trick">
-        <h3>💡 Reize aktiv ausschalten (Fokus-Hack)</h3>
-        <p>Schalte während der Unterrichtszeit den <strong>Fokus-Modus</strong> (Schulzeit-Profil) ein und nutze den <strong>Graustufen-Filter</strong>.</p>
-        <p style="font-size:0.82rem;color:var(--text-light);">Graue Bildschirme senken den Dopaminreiz drastisch und halten dich konzentriert.</p>
-      </div>
-      <div class="rule-box trick">
-        <h3>📌 Platzhalter für Schulregeln</h3>
-        <p>Hier werden die spezifischen Schulregeln des Amy Johnson Gymnasiums (z. B. WLAN-Zugang, Pausenregelung) abgebildet.</p>
-        <p style="font-size:0.82rem;color:var(--text-light);">(Werden nach Bedarf flexibel erweitert und aktualisiert).</p>
-      </div>
+    <div style="display:flex;justify-content:center;gap:1.2rem;flex-wrap:wrap;">
+      <a href="quiz.html?track=pc" class="btn btn-primary btn-lg">📝 Prüfung Laptop starten</a>
+      <a href="quiz.html?track=tablet" class="btn btn-accent btn-lg">📝 Prüfung Tablet starten</a>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>© 2026 <strong style="color:rgba(255,255,255,.95)">Amy Johnson Gymnasium</strong> · Digitaler Führerschein (Gymnasiale Oberstufe)</p>
+  <div class="footer-container">
+    <div>
+      <h4>Amy-Johnson-Gymnasium</h4>
+      <p>Staatliches Gymnasium des Landkreises Dahme-Spreewald<br>
+      Pestalozzistraße 1, 12529 Schönefeld<br>
+      Besucheradresse: Alt-Schönefeld 41</p>
+      <p style="margin-top:0.6rem;">Telefon: <a href="tel:03022029310">030 220 2931-0</a><br>
+      E-Mail: <a href="mailto:sekretariat.121368@lk.brandenburg.de">sekretariat.121368@lk.brandenburg.de</a></p>
+    </div>
+    <div>
+      <h4>Lernplattform</h4>
+      <ul>
+        <li><a href="pc.html">Laptop-Lernpfad (Windows 11)</a></li>
+        <li><a href="tablet.html">Tablet-Lernpfad (GoodNotes)</a></li>
+        <li><a href="quiz.html?track=pc">Abschlussprüfung Laptop</a></li>
+        <li><a href="quiz.html?track=tablet">Abschlussprüfung Tablet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Entwicklung &amp; IT</h4>
+      <p>Entwickelt von: <strong>Phil12992</strong><br>
+      Projekt: <em>Digitaler Führerschein AJG</em><br>
+      Stand: Schuljahr 2026<br>
+      Hosting: GitHub Pages (SSL verschlüsselt)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Amy Johnson Gymnasium &middot; Alle Rechte vorbehalten. Gültig für alle Jahrgangsstufen.
+  </div>
 </footer>
 
 <script src="js/app.js"></script>

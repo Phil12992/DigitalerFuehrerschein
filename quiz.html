@@ -16,220 +16,285 @@
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
-    <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC-Simulator</a></li>
-    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
-    <li><a href="quiz.html" class="active">📝 Prüfung</a></li>
-    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+    <li><a href="index.html">Startseite</a></li>
+    <li><a href="pc.html">💻 Laptop (Windows 11)</a></li>
+    <li><a href="tablet.html">📱 Tablet (GoodNotes &amp; Android)</a></li>
+    <li><a href="quiz.html?track=pc" id="nav-quiz-pc">📝 Prüfung Laptop</a></li>
+    <li><a href="quiz.html?track=tablet" id="nav-quiz-tab">📝 Prüfung Tablet</a></li>
   </ul>
 </nav>
 
 <main class="quiz-wrap">
-  <!-- SCREEN 1: ZUGANGSCODE -->
-  <div id="screen-code" class="quiz-card fade-up">
-    <div class="code-icon">🔐</div>
-    <h1>Abschlussprüfung Oberstufe</h1>
-    <p>Der Test schaltet deine offizielle Gerätenutzungserlaubnis für die Oberstufe frei. Bitte gib den Zugangscode deiner Lehrkraft ein:</p>
-    
+  <!-- SCREEN 1: CODE EINGABE -->
+  <div class="quiz-card fade-up" id="screen-code">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <span class="lesson-tag" id="track-tag">Abschlussprüfung</span>
+      <h1 style="color:var(--primary);font-size:1.8rem;font-weight:800;margin-top:0.6rem;" id="quiz-title">Offizielle Prüfung: Digitaler Führerschein</h1>
+      <p style="color:var(--text-sec);font-size:0.95rem;max-width:560px;margin:0.5rem auto 0;">
+        Das Zertifikat wird nur nach bestandener Prüfung freigeschaltet. Bitte gib den Zugangscode deiner Lehrkraft ein:
+      </p>
+    </div>
+
+    <!-- TRACK SELECTOR FALLS KEINER GEWÄHLT -->
+    <div style="display:flex;justify-content:center;gap:0.8rem;margin-bottom:1.2rem;">
+      <button class="btn btn-outline" id="btn-select-pc" onclick="selectTrack('pc')">💻 Laptop-Prüfung</button>
+      <button class="btn btn-outline" id="btn-select-tab" onclick="selectTrack('tablet')">📱 Tablet-Prüfung</button>
+    </div>
+
     <div class="code-row">
       <input type="text" id="code-input" placeholder="ZUGANGSCODE" maxlength="15" autocomplete="off">
-      <button class="btn btn-primary" onclick="checkCode()">Prüfung starten</button>
+      <button class="btn btn-primary" onclick="verifyAndStart()">Prüfung starten</button>
     </div>
-    <p class="code-err" id="code-err">Ungültiger Zugangscode! Frage deine Lehrkraft.</p>
-    
-    <div class="ibox info" style="margin-top:2rem;text-align:left">
-      <span class="ibox-icon">ℹ️</span>
-      <div class="ibox-body">
-        <strong>Prüfungsmodalitäten (Amy Johnson Gymnasium 2026)</strong>
-        <p>• 20 zufällig gemischte Fragen zu PC, Tablet, Datenschutz, KI und Schulregeln.<br>
-           • Mindestpunktzahl: <strong>70%</strong> zum Bestehen.<br>
-           • Nach erfolgreichem Test wird das druckbare Führerschein-Zertifikat freigeschaltet.</p>
-      </div>
-    </div>
+    <p class="code-err" id="code-err">Ungültiger Zugangscode! Frage deine Fachlehrkraft.</p>
 
-    <div class="ibox tip" style="margin-top:0.75rem;text-align:left">
-      <span class="ibox-icon">💡</span>
-      <div class="ibox-body">
-        <strong>Hinweis für Lehrkräfte &amp; Testbetrieb:</strong>
-        <p>Der voreingestellte Code lautet <code>AJG2025</code> (konfigurierbar in <code>js/quiz-data.js</code>).</p>
-      </div>
+    <div class="pro-box ok" style="margin-top:2rem;">
+      <h4>📋 Prüfungsrichtlinien:</h4>
+      <ul>
+        <li>10 Multiple-Choice-Fragen zu den Lektionen.</li>
+        <li><strong>Kein vorzeitiges Richtig/Falsch-Verraten:</strong> Du wählst deine Antworten aus und siehst das Gesamtergebnis erst am Ende.</li>
+        <li>Bestehensgrenze: <strong>70% (mind. 7 von 10 Fragen richtig)</strong>.</li>
+        <li>Erfolgreiche Prüfungen schalten das offizielle Zertifikat mit dem Siegel des Amy Johnson Gymnasiums frei.</li>
+      </ul>
     </div>
+    <small style="color:var(--text-light);display:block;text-align:center;margin-top:0.8rem;">(Testcode für Lehrkräfte: <code>AJG2025</code>)</small>
   </div>
 
-  <!-- SCREEN 2: QUIZ LAUFEND -->
-  <div id="screen-quiz" class="quiz-card fade-up hidden">
+  <!-- SCREEN 2: PRÜFUNG LÄUFT -->
+  <div class="quiz-card fade-up hidden" id="screen-exam">
     <div class="quiz-prog-row">
-      <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="q-prog" style="width:0%"></div></div>
-      <span class="quiz-count" id="q-count">1 / 20</span>
+      <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="exam-prog" style="width:0%"></div></div>
+      <span class="quiz-count" id="exam-count">1 / 10</span>
     </div>
-    <span class="q-cat" id="q-cat">Kategorie</span>
-    <h2 class="q-text" id="q-text"></h2>
-    <ul class="options" id="q-options"></ul>
-    <div class="q-feedback" id="q-feedback"></div>
-    <div class="q-nav">
-      <button class="btn btn-primary hidden" id="btn-next" onclick="nextQuestion()">Nächste Frage &rarr;</button>
+
+    <span class="q-cat" id="exam-cat">Themenbereich</span>
+    <h2 class="q-text" id="exam-question"></h2>
+
+    <ul class="options" id="exam-options"></ul>
+
+    <div class="lesson-actions" style="margin-top:2rem;">
+      <span style="font-size:0.85rem;color:var(--text-light);">Amy Johnson Gymnasium · Prüfungsmodus</span>
+      <button class="btn btn-primary btn-lg" id="btn-exam-next" onclick="submitAnswerAndNext()" disabled>Antwort bestätigen &rarr;</button>
     </div>
   </div>
 
-  <!-- SCREEN 3: ERGEBNIS -->
-  <div id="screen-result" class="quiz-card fade-up hidden">
-    <div class="result-icon" id="res-icon"></div>
-    <div class="result-score" id="res-score"></div>
-    <div class="result-msg" id="res-msg"></div>
-    <div class="result-btns" id="res-btns"></div>
+  <!-- SCREEN 3: AUSWERTUNG -->
+  <div class="quiz-card fade-up hidden" id="screen-result">
+    <div style="text-align:center;">
+      <div style="font-size:3.8rem;margin-bottom:0.5rem;" id="res-icon">🏆</div>
+      <h2 style="font-size:2rem;font-weight:800;color:var(--primary);margin-bottom:0.4rem;" id="res-title">Ergebnis</h2>
+      <div style="font-size:3.2rem;font-weight:800;margin:0.6rem 0;" id="res-score"></div>
+      <p style="font-size:1.02rem;color:var(--text-sec);max-width:540px;margin:0 auto 2rem;" id="res-desc"></p>
+      
+      <!-- KATEGORIE-ÜBERSICHT -->
+      <div id="res-categories" style="text-align:left;background:#F8FAFC;border:1px solid var(--border);border-radius:12px;padding:1.4rem;margin-bottom:2rem;"></div>
+
+      <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;" id="res-buttons"></div>
+    </div>
   </div>
 </main>
 
 <footer class="footer">
-  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <div class="footer-container">
+    <div>
+      <h4>Amy-Johnson-Gymnasium</h4>
+      <p>Staatliches Gymnasium des Landkreises Dahme-Spreewald<br>
+      Pestalozzistraße 1, 12529 Schönefeld<br>
+      Besucheradresse: Alt-Schönefeld 41</p>
+      <p style="margin-top:0.6rem;">Telefon: <a href="tel:03022029310">030 220 2931-0</a><br>
+      E-Mail: <a href="mailto:sekretariat.121368@lk.brandenburg.de">sekretariat.121368@lk.brandenburg.de</a></p>
+    </div>
+    <div>
+      <h4>Lernplattform</h4>
+      <ul>
+        <li><a href="pc.html">Laptop-Lernpfad (Windows 11)</a></li>
+        <li><a href="tablet.html">Tablet-Lernpfad (GoodNotes)</a></li>
+        <li><a href="quiz.html?track=pc">Abschlussprüfung Laptop</a></li>
+        <li><a href="quiz.html?track=tablet">Abschlussprüfung Tablet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Entwicklung &amp; IT</h4>
+      <p>Entwickelt von: <strong>Phil12992</strong><br>
+      Projekt: <em>Digitaler Führerschein AJG</em><br>
+      Stand: Schuljahr 2026<br>
+      Hosting: GitHub Pages (SSL verschlüsselt)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Amy Johnson Gymnasium &middot; Alle Rechte vorbehalten. Gültig für alle Jahrgangsstufen.
+  </div>
 </footer>
 
 <script src="js/quiz-data.js"></script>
-<script src="js/app.js"></script>
 <script>
-function shuffle(arr){
-  const a = [...arr];
-  for(let i=a.length-1; i>0; i--){
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
+let selectedTrack = 'pc';
+let examQuestions = [];
+let currentQIdx = 0;
+let userAnswers = [];
+let selectedOptionIdx = -1;
+
+function getUrlParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
 }
 
-let questions = [];
-let current = 0;
-let score = 0;
-let answered = false;
+function selectTrack(track) {
+  selectedTrack = track;
+  document.getElementById('btn-select-pc').classList.toggle('btn-primary', track === 'pc');
+  document.getElementById('btn-select-pc').classList.toggle('btn-outline', track !== 'pc');
+  document.getElementById('btn-select-tab').classList.toggle('btn-primary', track === 'tablet');
+  document.getElementById('btn-select-tab').classList.toggle('btn-outline', track !== 'tablet');
+  
+  document.getElementById('track-tag').textContent = track === 'pc' ? 'Prüfung: Laptop (Windows 11)' : 'Prüfung: Tablet (GoodNotes & Android)';
+  document.getElementById('quiz-title').textContent = track === 'pc' ? 'Abschlussprüfung: Laptop-Führerschein' : 'Abschlussprüfung: Tablet-Führerschein';
+}
 
-function checkCode(){
-  const val = document.getElementById("code-input").value.trim().toUpperCase();
-  if(val === QUIZ_ACCESS_CODE.toUpperCase()){
-    questions = shuffle(QUIZ_QUESTIONS);
-    document.getElementById("screen-code").classList.add("hidden");
-    document.getElementById("screen-quiz").classList.remove("hidden");
-    current = 0;
-    score = 0;
-    loadQuestion();
+function verifyAndStart() {
+  const code = document.getElementById('code-input').value.trim().toUpperCase();
+  if (code === QUIZ_ACCESS_CODE.toUpperCase()) {
+    document.getElementById('code-err').style.display = 'none';
+    startExam();
   } else {
-    document.getElementById("code-err").style.display = "block";
+    document.getElementById('code-err').style.display = 'block';
   }
 }
 
-document.getElementById("code-input").addEventListener("keydown", e => {
-  if(e.key === "Enter") checkCode();
+document.getElementById('code-input').addEventListener('keydown', e => {
+  if (e.key === 'Enter') verifyAndStart();
 });
 
-function loadQuestion(){
-  answered = false;
-  const q = questions[current];
-  const total = questions.length;
-  
-  document.getElementById("q-prog").style.width = ((current / total) * 100) + "%";
-  document.getElementById("q-count").textContent = (current + 1) + " / " + total;
-  document.getElementById("q-cat").textContent = q.cat;
-  document.getElementById("q-text").textContent = q.q;
-  
-  const fb = document.getElementById("q-feedback");
-  fb.style.display = "none";
-  fb.className = "q-feedback";
-  document.getElementById("btn-next").classList.add("hidden");
-  
-  const ul = document.getElementById("q-options");
-  ul.innerHTML = "";
-  const letters = ["A", "B", "C", "D"];
-  
-  q.opts.forEach((opt, i) => {
-    const li = document.createElement("li");
-    li.className = "opt";
-    li.innerHTML = `<span class="opt-letter">${letters[i]}</span> <span>${opt}</span>`;
-    li.addEventListener("click", () => selectAnswer(i, q.correct, q.explain));
+function startExam() {
+  const pool = [...QUIZ_BANK[selectedTrack]];
+  // Shuffeln
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  examQuestions = pool;
+  currentQIdx = 0;
+  userAnswers = [];
+  selectedOptionIdx = -1;
+
+  document.getElementById('screen-code').classList.add('hidden');
+  document.getElementById('screen-exam').classList.remove('hidden');
+  loadQuestion();
+}
+
+function loadQuestion() {
+  selectedOptionIdx = -1;
+  const q = examQuestions[currentQIdx];
+  const total = examQuestions.length;
+
+  document.getElementById('exam-prog').style.width = ((currentQIdx / total) * 100) + '%';
+  document.getElementById('exam-count').textContent = `${currentQIdx + 1} / ${total}`;
+  document.getElementById('exam-cat').textContent = q.cat;
+  document.getElementById('exam-question').textContent = q.q;
+
+  const btnNext = document.getElementById('btn-exam-next');
+  btnNext.disabled = true;
+  btnNext.textContent = (currentQIdx === total - 1) ? 'Prüfung abgeben 🏁' : 'Antwort bestätigen &rarr;';
+
+  const ul = document.getElementById('exam-options');
+  ul.innerHTML = '';
+  const letters = ['A', 'B', 'C', 'D'];
+
+  q.opts.forEach((opt, idx) => {
+    const li = document.createElement('li');
+    li.className = 'opt';
+    li.innerHTML = `<span class="opt-letter">${letters[idx]}</span> <span>${opt}</span>`;
+    li.addEventListener('click', () => {
+      document.querySelectorAll('.opt').forEach(o => o.classList.remove('selected'));
+      li.classList.add('selected');
+      selectedOptionIdx = idx;
+      btnNext.disabled = false;
+    });
     ul.appendChild(li);
   });
-
-  if(current === questions.length - 1){
-    document.getElementById("btn-next").textContent = "Prüfungsergebnis anzeigen 📊";
-  } else {
-    document.getElementById("btn-next").textContent = "Nächste Frage &rarr;";
-  }
 }
 
-function selectAnswer(idx, correct, explain){
-  if(answered) return;
-  answered = true;
-  
-  const opts = document.querySelectorAll(".opt");
-  opts.forEach((o, i) => {
-    if(i === correct) o.classList.add("correct");
-    else if(i === idx && idx !== correct) o.classList.add("wrong");
-    o.style.cursor = "default";
-  });
-  
-  const fb = document.getElementById("q-feedback");
-  if(idx === correct){
-    score++;
-    fb.className = "q-feedback correct";
-    fb.textContent = "✅ Richtig! " + explain;
-  } else {
-    fb.className = "q-feedback wrong";
-    fb.textContent = "❌ Leider falsch. " + explain;
-  }
-  fb.style.display = "block";
-  document.getElementById("btn-next").classList.remove("hidden");
-}
+function submitAnswerAndNext() {
+  if (selectedOptionIdx === -1) return;
+  userAnswers.push(selectedOptionIdx);
+  currentQIdx++;
 
-function nextQuestion(){
-  current++;
-  if(current >= questions.length){
-    showResult();
+  if (currentQIdx >= examQuestions.length) {
+    showExamResult();
   } else {
     loadQuestion();
   }
 }
 
-function showResult(){
-  document.getElementById("screen-quiz").classList.add("hidden");
-  const res = document.getElementById("screen-result");
-  res.classList.remove("hidden");
-  
-  const total = questions.length;
-  const pct = Math.round((score / total) * 100);
+function showExamResult() {
+  document.getElementById('screen-exam').classList.add('hidden');
+  const resScreen = document.getElementById('screen-result');
+  resScreen.classList.remove('hidden');
+
+  let correctCount = 0;
+  const categoryStats = {};
+
+  examQuestions.forEach((q, idx) => {
+    const isCorrect = (userAnswers[idx] === q.correct);
+    if (isCorrect) correctCount++;
+
+    if (!categoryStats[q.cat]) categoryStats[q.cat] = { total: 0, correct: 0 };
+    categoryStats[q.cat].total++;
+    if (isCorrect) categoryStats[q.cat].correct++;
+  });
+
+  const total = examQuestions.length;
+  const pct = Math.round((correctCount / total) * 100);
   const passed = pct >= MIN_PASS_PERCENT;
-  
-  storeQuizPass(score, total);
-  
-  document.getElementById("res-icon").textContent = passed ? "🏆" : "❌";
-  document.getElementById("res-score").className = "result-score " + (passed ? "pass-score" : "fail-score");
-  document.getElementById("res-score").textContent = pct + "%";
-  
-  const msg = document.getElementById("res-msg");
-  msg.className = "result-msg " + (passed ? "pass" : "fail");
-  
-  if(passed){
-    msg.innerHTML = `<h2>Herzlichen Glückwunsch! Bestanden 🎉</h2>
-      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig beantwortet. Damit hast du alle Voraussetzungen für die Gerätenutzung in der Oberstufe erfüllt.</p>`;
-  } else {
-    msg.innerHTML = `<h2>Leider nicht bestanden</h2>
-      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig. Zum Bestehen benötigst du mindestens <strong>${MIN_PASS_PERCENT}%</strong>. Wiederhole die Module und versuche es erneut!</p>`;
+
+  // Prüfungsnachweis im SessionStorage hinterlegen
+  if (passed) {
+    sessionStorage.setItem('ajg_passed_track', selectedTrack);
+    sessionStorage.setItem('ajg_passed_score', pct + '%');
+    sessionStorage.setItem('ajg_passed_token', 'TOKEN_' + Date.now());
   }
-  
-  const btns = document.getElementById("res-btns");
-  if(passed){
-    btns.innerHTML = `<a href="certificate.html" class="btn btn-accent btn-lg">🏅 Zum Führerschein-Zertifikat</a>
-                      <a href="index.html" class="btn btn-outline">Zur Startseite</a>`;
+
+  document.getElementById('res-icon').textContent = passed ? '🎉' : '❌';
+  const scoreElem = document.getElementById('res-score');
+  scoreElem.textContent = `${pct}% (${correctCount} von ${total} richtig)`;
+  scoreElem.style.color = passed ? 'var(--success)' : '#EF4444';
+
+  const titleElem = document.getElementById('res-title');
+  const descElem = document.getElementById('res-desc');
+  const btnsElem = document.getElementById('res-buttons');
+
+  if (passed) {
+    titleElem.textContent = 'Herzlichen Glückwunsch! Bestanden';
+    descElem.innerHTML = `Du hast die Mindestanforderung von ${MIN_PASS_PERCENT}% erfüllt und die Sachkunde für die Gerätenutzung am Amy Johnson Gymnasium nachgewiesen.`;
+    btnsElem.innerHTML = `
+      <a href="certificate.html" class="btn btn-accent btn-lg">🏅 Offizielles Zertifikat abrufen &rarr;</a>
+      <a href="index.html" class="btn btn-outline">Zur Startseite</a>
+    `;
   } else {
-    btns.innerHTML = `<button class="btn btn-primary btn-lg" onclick="restartQuiz()">🔄 Test wiederholen</button>
-                      <a href="index.html" class="btn btn-outline">Module nachlesen</a>`;
+    titleElem.textContent = 'Leider nicht bestanden';
+    descElem.innerHTML = `Du hast ${pct}% erreicht. Zum Bestehen sind mindestens <strong>${MIN_PASS_PERCENT}%</strong> erforderlich. Lies die Lektionen noch einmal durch und starte einen neuen Versuch.`;
+    btnsElem.innerHTML = `
+      <button class="btn btn-primary btn-lg" onclick="startExam()">🔄 Prüfung wiederholen</button>
+      <a href="${selectedTrack === 'pc' ? 'pc.html' : 'tablet.html'}" class="btn btn-outline">Lektionen wiederholen</a>
+    `;
+  }
+
+  // Kategorien ausgeben
+  const catDiv = document.getElementById('res-categories');
+  catDiv.innerHTML = '<h4 style="color:var(--primary);margin-bottom:0.8rem;font-size:0.95rem;">Ergebnisse nach Themenbereichen:</h4>';
+  for (const [cat, stat] of Object.entries(categoryStats)) {
+    const catPct = Math.round((stat.correct / stat.total) * 100);
+    catDiv.innerHTML += `
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.4rem;font-size:0.88rem;">
+        <span><strong>${cat}:</strong></span>
+        <span>${stat.correct}/${stat.total} richtig (${catPct}%)</span>
+      </div>
+    `;
   }
 }
 
-function restartQuiz(){
-  current = 0;
-  score = 0;
-  questions = shuffle(QUIZ_QUESTIONS);
-  document.getElementById("screen-result").classList.add("hidden");
-  document.getElementById("screen-quiz").classList.remove("hidden");
-  loadQuestion();
-}
+document.addEventListener('DOMContentLoaded', () => {
+  const t = getUrlParam('track') || 'pc';
+  selectTrack(t);
+});
 </script>
 </body>
 </html>

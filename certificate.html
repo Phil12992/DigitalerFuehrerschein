@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zertifikat – Digitaler Führerschein (2026)</title>
+  <title>Offizielles Zertifikat – Amy Johnson Gymnasium (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,73 +16,93 @@
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
-    <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC-Simulator</a></li>
-    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
-    <li><a href="quiz.html">📝 Prüfung</a></li>
-    <li><a href="certificate.html" class="active">🏅 Zertifikat</a></li>
+    <li><a href="index.html">Startseite</a></li>
+    <li><a href="pc.html">💻 Laptop (Windows 11)</a></li>
+    <li><a href="tablet.html">📱 Tablet (GoodNotes &amp; Android)</a></li>
+    <li><a href="quiz.html?track=pc">📝 Prüfung Laptop</a></li>
+    <li><a href="quiz.html?track=tablet">📝 Prüfung Tablet</a></li>
   </ul>
 </nav>
 
-<main class="cert-wrap no-print">
-  <div class="cert-setup-card fade-up" id="cert-form">
-    <div style="font-size:3.2rem;text-align:center;margin-bottom:.75rem">🏅</div>
-    <h1>Offizieller Digitaler Führerschein</h1>
-    <p>Trage deine Daten ein, um das personalisierte Führerschein-Zertifikat mit dem Logo des Amy Johnson Gymnasiums zu generieren.</p>
-    
-    <div class="form-row">
-      <label for="inp-name">Vor- und Nachname</label>
-      <input type="text" id="inp-name" placeholder="z.B. Anna Schmidt" autocomplete="name">
+<main class="cert-wrap no-print" id="cert-protection-view">
+  <!-- WIRD GEFÜLLT JE NACHDEM OB DIE PRÜFUNG BESTANDEN WURDE -->
+  <div class="cert-setup-card fade-up" id="gatekeeper-card">
+    <div style="font-size:3rem;text-align:center;margin-bottom:.6rem;">🔒</div>
+    <h1 style="color:var(--primary);text-align:center;font-size:1.6rem;font-weight:800;margin-bottom:0.4rem;">Prüfungsnachweis erforderlich</h1>
+    <p style="color:var(--text-sec);text-align:center;font-size:0.92rem;margin-bottom:1.5rem;">
+      Das offizielle Zertifikat des Amy Johnson Gymnasiums ist geschützt und wird erst nach erfolgreichem Bestehen der Abschlussprüfung freigeschaltet.
+    </p>
+
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;">
+      <a href="quiz.html?track=pc" class="btn btn-primary">Prüfung Laptop starten</a>
+      <a href="quiz.html?track=tablet" class="btn btn-accent">Prüfung Tablet starten</a>
     </div>
+  </div>
+
+  <!-- FORMULAR NUR WENN BESTANDEN -->
+  <div class="cert-setup-card fade-up hidden" id="cert-form-card">
+    <div style="text-align:center;font-size:2.8rem;margin-bottom:.5rem;">🏅</div>
+    <h1 style="color:var(--primary);text-align:center;font-size:1.65rem;font-weight:800;margin-bottom:0.3rem;">Zertifikat ausstellen</h1>
+    <p style="color:var(--text-sec);text-align:center;font-size:0.92rem;margin-bottom:1.8rem;">
+      Trage deine Daten ein, um das druckfähige Dokument für Schulleitung und Klassenleitung zu generieren:
+    </p>
+
     <div class="form-row">
-      <label for="inp-klasse">Jahrgangsstufe / Kurs / Klasse</label>
-      <input type="text" id="inp-klasse" placeholder="z.B. Q1 / Jahrgangsstufe 11">
+      <label for="inp-name">Vollständiger Vor- und Nachname</label>
+      <input type="text" id="inp-name" placeholder="z.B. Lukas Meyer" autocomplete="name">
     </div>
+
     <div class="form-row">
-      <label for="inp-device">Geprüftes Gerät / Modul</label>
+      <label for="inp-klasse">Klasse / Jahrgangsstufe</label>
+      <input type="text" id="inp-klasse" placeholder="z.B. Klasse 8b oder Jahrgangsstufe 11 (Q1)">
+    </div>
+
+    <div class="form-row">
+      <label for="inp-device">Geräte-Kategorie</label>
       <select id="inp-device">
         <option value="Laptop / PC (Windows 11)">Laptop / PC (Windows 11)</option>
         <option value="Tablet (Apple iPad / GoodNotes)">Tablet (Apple iPad / GoodNotes)</option>
-        <option value="Tablet (Samsung Galaxy Tab / Samsung Notes)">Tablet (Samsung Galaxy Tab / Samsung Notes)</option>
-        <option value="Universell (Laptop & Tablet)">Universell (Laptop & Tablet)</option>
+        <option value="Tablet (Samsung Galaxy Tab / Android)">Tablet (Samsung Galaxy Tab / Android)</option>
       </select>
     </div>
+
     <div class="form-row">
-      <label for="inp-serial">Geräte-Modell / Kennung (optional)</label>
-      <input type="text" id="inp-serial" placeholder="z.B. Surface Laptop oder iPad Air">
+      <label for="inp-serial">Gerätemodell / Seriennummer (optional)</label>
+      <input type="text" id="inp-serial" placeholder="z.B. Lenovo ThinkPad L13 oder iPad 10. Gen">
     </div>
 
-    <button class="btn btn-accent btn-lg" style="width:100%;margin-top:1.2rem;justify-content:center" onclick="generateCert()">
-      🎓 Führerschein-Zertifikat erstellen
+    <button class="btn btn-accent btn-lg" style="width:100%;justify-content:center;margin-top:1rem;" onclick="generateOfficialCertificate()">
+      🎓 Offizielles Zertifikat generieren
     </button>
   </div>
 </main>
 
-<!-- DRUCK- & ANZEIGE-BEREICH DES ZERTIFIKATS -->
+<!-- DRUCK-DOKUMENT -->
 <div class="cert-print-area" id="cert-output" style="display:none">
   <div class="certificate">
     <div class="cert-header">
       <div class="cert-logo-box">
-        <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="cert-logo">
+        <img src="assets/logo.png" alt="Amy Johnson Gymnasium Logo" class="cert-logo">
       </div>
       <div class="cert-seal">
-        <span style="font-size:1.6rem">🎓</span>
+        <span style="font-size:1.5rem">🎓</span>
         <span>AMY JOHNSON<br>GYMNASIUM</span>
       </div>
     </div>
     <div class="cert-body">
-      <p class="cert-pre">Amy Johnson Gymnasium · Schuljahr 2026</p>
+      <p class="cert-pre">Amy Johnson Gymnasium Schönefeld · Schuljahr 2026</p>
       <h1 class="cert-main">Digitaler <span>Führerschein</span></h1>
-      <p class="cert-sub">Hiermit wird bescheinigt, dass</p>
+      <p class="cert-sub">Hiermit wird offiziell bescheinigt, dass</p>
       <div class="cert-name" id="cert-name-out">Vorname Nachname</div>
-      <p class="cert-sub" id="cert-klasse-out" style="font-weight:600;margin-bottom:0.8rem;color:var(--primary);"></p>
-      <div class="cert-device" id="cert-device-out">Geräte-Kategorie</div>
-      <p class="cert-desc" style="line-height:1.7;">
-        die Module zur Vorbereitung auf den digitalen Unterricht erfolgreich absolviert und die Abschlussprüfung
-        zu den Themen <strong>Datenschutz, Dateistrukturierung, Urheberrecht, KI-Nutzung &amp; Verhaltensregeln</strong> bestanden hat.<br>
-        Das Mitglied der Oberstufe ist berechtigt, das entsprechende Gerät im Unterricht zweckgebunden einzusetzen.
+      <p class="cert-sub" id="cert-klasse-out" style="font-weight:700;color:var(--primary);margin-bottom:0.7rem;"></p>
+      <div class="cert-device" id="cert-device-out">Gerätekategorie</div>
+      <p class="cert-desc">
+        alle Lektionen zur ordnungsgemäßen Nutzung digitaler Endgeräte am Amy Johnson Gymnasium erfolgreich absolviert
+        und die offizielle Prüfung zu den Themen <strong>Verhaltenskodex, Dateiorganisation, Datenschutz (§ 201a StGB),
+        KI-Kompetenz und Reizunterdrückung</strong> bestanden hat.<br>
+        Die Schülerin / der Schüler ist berechtigt, das genannte Endgerät im Unterricht zweckgebunden einzusetzen.
       </p>
-      <p id="cert-serial-out" style="font-size:0.75rem;color:var(--text-sec);margin-top:0.6rem;"></p>
+      <p id="cert-serial-out" style="font-size:0.75rem;color:var(--text-sec);margin-top:0.4rem;"></p>
     </div>
     <div class="cert-foot">
       <div>
@@ -90,56 +110,96 @@
         <span id="cert-date-out">–</span>
       </div>
       <div style="text-align:center">
-        <div style="border-top:1.5px dashed #A0AEC0;width:180px;margin:0 auto 0.4rem;"></div>
-        <span>Unterschrift Schulleitung / Fachlehrkraft</span>
+        <div style="border-top:1.5px dashed #94A3B8;width:180px;margin:0 auto 0.4rem;"></div>
+        <span>Unterschrift Fachlehrkraft / Schulleitung</span>
       </div>
       <div style="text-align:right">
         <strong>Amy Johnson Gymnasium</strong><br>
-        <span style="color:#718096">Gültig für die gymnasiale Oberstufe</span>
+        <span style="color:#64748B">Schul-ID: 121368 (Brandenburg)</span>
       </div>
     </div>
   </div>
 
   <div style="text-align:center;margin:1.5rem 0 3rem" class="no-print">
     <button class="btn btn-primary btn-lg" onclick="window.print()">🖨️ Jetzt Drucken / Als PDF speichern</button>
-    <button class="btn btn-outline" style="margin-left:.75rem" onclick="resetForm()">✏️ Angaben bearbeiten</button>
-    <a href="index.html" class="btn btn-outline" style="margin-left:.75rem">🏠 Zurück zur Startseite</a>
+    <button class="btn btn-outline" style="margin-left:0.8rem;" onclick="resetCertForm()">✏️ Angaben bearbeiten</button>
+    <a href="index.html" class="btn btn-outline" style="margin-left:0.8rem;">Zur Startseite</a>
   </div>
 </div>
 
 <footer class="footer no-print">
-  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <div class="footer-container">
+    <div>
+      <h4>Amy-Johnson-Gymnasium</h4>
+      <p>Pestalozzistraße 1, 12529 Schönefeld<br>
+      Besucheradresse: Alt-Schönefeld 41</p>
+      <p style="margin-top:0.5rem;">Telefon: 030 220 2931-0<br>
+      E-Mail: sekretariat.121368@lk.brandenburg.de</p>
+    </div>
+    <div>
+      <h4>Lernplattform</h4>
+      <ul>
+        <li><a href="pc.html">Laptop-Lernpfad</a></li>
+        <li><a href="tablet.html">Tablet-Lernpfad</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Entwicklung</h4>
+      <p>Entwickelt von: <strong>Phil12992</strong><br>
+      Gültig: Schuljahr 2026</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Amy Johnson Gymnasium &middot; Alle Rechte vorbehalten.
+  </div>
 </footer>
 
-<script src="js/app.js"></script>
 <script>
-function generateCert(){
-  const name   = document.getElementById("inp-name").value.trim();
-  const klasse = document.getElementById("inp-klasse").value.trim();
-  const device = document.getElementById("inp-device").value;
-  const serial = document.getElementById("inp-serial").value.trim();
+document.addEventListener('DOMContentLoaded', () => {
+  const token = sessionStorage.getItem('ajg_passed_token');
+  const track = sessionStorage.getItem('ajg_passed_track');
 
-  if(!name){
-    alert("Bitte gib deinen Namen ein.");
+  if (token) {
+    document.getElementById('gatekeeper-card').classList.add('hidden');
+    document.getElementById('cert-form-card').classList.remove('hidden');
+    if (track === 'tablet') {
+      document.getElementById('inp-device').value = 'Tablet (Apple iPad / GoodNotes)';
+    } else {
+      document.getElementById('inp-device').value = 'Laptop / PC (Windows 11)';
+    }
+  } else {
+    document.getElementById('gatekeeper-card').classList.remove('hidden');
+    document.getElementById('cert-form-card').classList.add('hidden');
+  }
+});
+
+function generateOfficialCertificate() {
+  const name = document.getElementById('inp-name').value.trim();
+  const klasse = document.getElementById('inp-klasse').value.trim();
+  const device = document.getElementById('inp-device').value;
+  const serial = document.getElementById('inp-serial').value.trim();
+
+  if (!name) {
+    alert('Bitte gib deinen Namen ein.');
     return;
   }
 
-  document.getElementById("cert-name-out").textContent   = name;
-  document.getElementById("cert-klasse-out").textContent = klasse ? "Klasse / Jahrgangsstufe: " + klasse : "Gymnasiale Oberstufe";
-  document.getElementById("cert-device-out").textContent = "Zugelassenes Gerät: " + device;
-  document.getElementById("cert-serial-out").textContent = serial ? "Gerätekennung: " + serial : "";
+  document.getElementById('cert-name-out').textContent = name;
+  document.getElementById('cert-klasse-out').textContent = klasse ? 'Klasse / Jahrgangsstufe: ' + klasse : 'Schülerin / Schüler des Amy Johnson Gymnasiums';
+  document.getElementById('cert-device-out').textContent = 'Zugelassenes Gerät: ' + device;
+  document.getElementById('cert-serial-out').textContent = serial ? 'Gerätekennung / Modell: ' + serial : '';
 
   const now = new Date();
-  document.getElementById("cert-date-out").textContent = now.toLocaleDateString("de-DE", {day:"2-digit", month:"long", year:"numeric"});
+  document.getElementById('cert-date-out').textContent = now.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
 
-  document.getElementById("cert-form").style.display   = "none";
-  document.getElementById("cert-output").style.display = "block";
+  document.getElementById('cert-protection-view').style.display = 'none';
+  document.getElementById('cert-output').style.display = 'block';
   window.scrollTo(0, 0);
 }
 
-function resetForm(){
-  document.getElementById("cert-form").style.display   = "block";
-  document.getElementById("cert-output").style.display = "none";
+function resetCertForm() {
+  document.getElementById('cert-protection-view').style.display = 'block';
+  document.getElementById('cert-output').style.display = 'none';
 }
 </script>
 </body>

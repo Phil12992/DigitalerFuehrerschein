@@ -1,249 +1,256 @@
-﻿// ================================================
-//  QUIZ KONFIGURATION – Digitaler Führerschein
-//  Zugangscode hier aendern:
-// ================================================
-const QUIZ_ACCESS_CODE = "AJG2025";   // <-- Hier den Code aendern
-const MIN_PASS_PERCENT  = 70;         // Mindest-Prozent zum Bestehen
+﻿// ====================================================
+// GEPRÜFTE PRÜFUNGSFRAGEN – AMY JOHNSON GYMNASIUM (2026)
+// Für das gesamte Gymnasium (Sek I & Sek II)
+// Voreingestellter Zugangscode: AJG2025
+// ====================================================
 
-const QUIZ_QUESTIONS = [
-  {
-    cat: "Dateiorganisation",
-    q: "Wie solltest du Dateien auf deinem Schulgerät am besten benennen?",
-    opts: [
-      "neues dokument.docx",
-      "2025-09-17_Biologie_Mitschrift_K11.docx",
-      "asdf123.docx",
-      "Dateien müssen gar nicht benannt werden"
-    ],
-    correct: 1,
-    explain: "Eine strukturierte Benennung mit Datum, Fach und Thema hilft dir, Dateien schnell wiederzufinden."
-  },
-  {
-    cat: "Sicherheit",
-    q: "Was ist eine sichere Passwortstrategie?",
-    opts: [
-      "Deinen Namen und Geburtsjahr verwenden (z.B. Max2008)",
-      "Immer dasselbe Passwort für alle Accounts nutzen",
-      "Eine zufällige Kombination aus Groß-/Kleinbuchstaben, Zahlen und Sonderzeichen",
-      "Passwörter auf einem Zettel neben dem Gerät notieren"
-    ],
-    correct: 2,
-    explain: "Sichere Passwörter sind komplex, einzigartig pro Dienst und werden nicht aufgeschrieben oder geteilt."
-  },
-  {
-    cat: "Datenschutz & Recht",
-    q: "Du machst ein Foto von einem Mitschüler im Unterricht und möchtest es posten. Was gilt?",
-    opts: [
-      "Kein Problem, solange es lustig ist",
-      "Erlaubt, wenn das Foto gut aussieht",
-      "Ohne ausdrückliche Einwilligung der abgebildeten Person ist das verboten",
-      "Nur in privaten Chats darf man es teilen"
-    ],
-    correct: 2,
-    explain: "Das Recht am eigenen Bild schützt jede Person. Fotos von Mitschülern dürfen ohne deren Erlaubnis nicht verbreitet werden."
-  },
-  {
-    cat: "Tablet & Notiz-Apps",
-    q: "Wie organisierst du Notizen optimal in GoodNotes (iPad) oder Samsung Notes?",
-    opts: [
-      "Alles in einem einzigen Notizbuch chronologisch",
-      "Pro Schulfach ein separates Notizbuch mit klarer Struktur",
-      "Keine Struktur nötig – suchen reicht",
-      "Alle Notizen auf einer einzigen langen Seite"
-    ],
-    correct: 1,
-    explain: "Ein Notizbuch pro Fach mit Registerseiten macht Notizen leicht auffindbar und übersichtlich."
-  },
-  {
-    cat: "Netiquette",
-    q: "Was bedeutet 'Netiquette'?",
-    opts: [
-      "Schnelles Tippen ohne Rechtschreibfehler",
-      "Verhaltens- und Umgangsregeln im Internet und digitaler Kommunikation",
-      "Eine Art Internetzensur durch die Schule",
-      "Der technische Standard für Schul-WLANs"
-    ],
-    correct: 1,
-    explain: "Netiquette beschreibt höfliches, respektvolles Verhalten in der digitalen Kommunikation – wie Benehmen in der echten Welt."
-  },
-  {
-    cat: "Schulregeln",
-    q: "Wann darfst du dein digitales Gerät im Unterricht benutzen?",
-    opts: [
-      "Immer und nach Belieben, auch während einer Erklärung",
-      "Nur wenn die Lehrkraft es explizit erlaubt oder aufgegeben hat",
-      "Niemals – Geräte sind im Unterricht verboten",
-      "Ausschließlich in den letzten 5 Minuten der Stunde"
-    ],
-    correct: 1,
-    explain: "Digitale Geräte sind Lernwerkzeuge. Im Unterricht gelten die Regeln der Lehrkraft. Ohne Erlaubnis bleibt das Gerät weg."
-  },
-  {
-    cat: "Cloud & Speicher",
-    q: "Wofür stehen OneDrive, iCloud und Google Drive?",
-    opts: [
-      "Programm zum Bearbeiten von Fotos",
-      "Antivirusprogramme für Schulgeräte",
-      "Cloud-Speicherdienste zum Speichern und automatischen Synchronisieren von Dateien",
-      "Kommunikationsprogramme wie E-Mail"
-    ],
-    correct: 2,
-    explain: "Cloud-Dienste speichern deine Dateien online und machen sie auf allen deinen Geräten verfügbar – auch wenn dein Gerät verloren geht."
-  },
-  {
-    cat: "Cyber-Mobbing",
-    q: "Du wirst Opfer von Cyber-Mobbing. Was ist der richtige erste Schritt?",
-    opts: [
-      "Schweigen und hoffen, dass es von allein aufhört",
-      "Zurückmobben und den Täter bloßstellen",
-      "Beweise sichern (Screenshots), melden und eine Vertrauensperson informieren",
-      "Das Gerät dauerhaft weglegen und auf Social Media verzichten"
-    ],
-    correct: 2,
-    explain: "Cyber-Mobbing muss gemeldet werden. Beweise sichern, nicht selbst eskalieren und Hilfe bei Lehrkräften oder Schulberatung suchen."
-  },
-  {
-    cat: "Gerätepflege",
-    q: "Wie schonst du den Akku deines Geräts langfristig am besten?",
-    opts: [
-      "Gerät immer auf 100% geladen lassen (dauernd am Strom)",
-      "Akku komplett entleeren bevor man lädt",
-      "Ladestand zwischen 20–80% halten und extreme Temperaturen vermeiden",
-      "Akku ist egal, der wird sowieso irgendwann ersetzt"
-    ],
-    correct: 2,
-    explain: "Lithium-Akkus halten am längsten, wenn sie nicht ständig voll- oder leergeladen werden. 20–80% ist ideal."
-  },
-  {
-    cat: "KI & Quellen",
-    q: "Du nutzt ChatGPT für eine Schularbeit. Was ist dabei unbedingt zu beachten?",
-    opts: [
-      "KI-Texte können unverändert als eigene Leistung abgegeben werden",
-      "KI ist in der Schule generell verboten – nicht nutzen",
-      "KI-Nutzung muss kenntlich gemacht werden, Ergebnisse kritisch prüfen und Quellen angeben",
-      "KI macht Schularbeiten überflüssig"
-    ],
-    correct: 2,
-    explain: "KI ist ein hilfreiches Werkzeug, aber keine eigene Leistung. Nutzung deklarieren, Fakten prüfen und kritisch denken bleibt deine Aufgabe."
-  },
-  {
-    cat: "Produktivität",
-    q: "Was bewirkt der 'Fokus-Modus' auf Windows 11 oder dem iPad?",
-    opts: [
-      "Der Bildschirm wird heller und kontrastreicher",
-      "Das Gerät wird schneller durch Deaktivierung von Hintergrundprozessen",
-      "Benachrichtigungen, Ablenkungen und störende Apps werden unterdrückt",
-      "Das WLAN wird für bestimmte Apps gesperrt"
-    ],
-    correct: 2,
-    explain: "Der Fokus-Modus hilft dir, konzentriert zu arbeiten, indem er störende Benachrichtigungen und Pop-ups unterbindet."
-  },
-  {
-    cat: "Datenschutz & Recht",
-    q: "Was schützt das Urheberrecht?",
-    opts: [
-      "Das Recht, alles aus dem Internet kostenlos herunterzuladen",
-      "Kreative Werke wie Texte, Bilder, Musik und Videos vor unerlaubter Nutzung",
-      "Nur professionelle Künstler und Autoren, nicht Schüler",
-      "Den Zugang zu kostenpflichtigen Webseiten"
-    ],
-    correct: 1,
-    explain: "Urheberrecht schützt alle kreativen Werke automatisch. Einfach kopieren oder weiterverwenden ist ohne Genehmigung strafbar."
-  },
-  {
-    cat: "Kommunikation",
-    q: "Wie ist eine professionelle Schulmail aufgebaut?",
-    opts: [
-      "Nur Emojis und Jugendsprache – Lehrkräfte müssen sich anpassen",
-      "So kurz wie möglich ohne Anrede",
-      "Korrekte Anrede, präziser Betreff, höflicher Text, Gruß und vollständiger Name",
-      "Keine Struktur nötig – Hauptsache, die Info ist drin"
-    ],
-    correct: 2,
-    explain: "In E-Mails an Lehrkräfte gilt formale Sprache: Anrede, klarer Betreff, höflicher Text und vollständiger Name sind Pflicht."
-  },
-  {
-    cat: "Sicherheit",
-    q: "Du bist fertig an einem öffentlichen Schulcomputer. Was tust du?",
-    opts: [
-      "Angemeldet lassen – der nächste merkt es schon",
-      "Das Passwort im Browser speichern für nächstes Mal",
-      "Abmelden, Browserverlauf löschen, keine Zugangsdaten gespeichert lassen",
-      "Nur das Fenster schließen reicht"
-    ],
-    correct: 2,
-    explain: "Auf gemeinsam genutzten Geräten immer abmelden und keine persönlichen Daten hinterlassen, um Missbrauch zu verhindern."
-  },
-  {
-    cat: "Tablet & Notiz-Apps",
-    q: "Welche Notiz-App ist die beste Wahl für Samsung-Tablets?",
-    opts: [
-      "GoodNotes – die beste App überhaupt",
-      "Nur mit Stift arbeitende Apps sind erlaubt",
-      "Samsung Notes oder Microsoft OneNote (GoodNotes gibt es nicht für Android)",
-      "WhatsApp-Notizen sind ausreichend"
-    ],
-    correct: 2,
-    explain: "GoodNotes ist nur für iPad/macOS verfügbar. Samsung-Tablet-Nutzer greifen auf Samsung Notes oder Microsoft OneNote zurück."
-  },
-  {
-    cat: "Schulregeln",
-    q: "Wie nutzt du das Schul-WLAN verantwortungsvoll?",
-    opts: [
-      "Für private Downloads, Streaming und Gaming – dafür ist WLAN da",
-      "Das Passwort an Freunde und Familie weitergeben",
-      "Nur für schulische Zwecke nutzen und keine unnötige Bandbreite verbrauchen",
-      "Das WLAN ist frei, also darf man alles damit machen"
-    ],
-    correct: 2,
-    explain: "Das Schul-WLAN ist für den Unterricht gedacht. Missbrauch kann zum Verlust des Zugangs und zu rechtlichen Konsequenzen führen."
-  },
-  {
-    cat: "Gerätepflege",
-    q: "Wie schützt du dein Gerät vor physischen Schäden?",
-    opts: [
-      "Ungeschützt in der Tasche transportieren – ein bisschen Stoß hält es aus",
-      "Schutzcase und Displayschutzfolie verwenden und sorgfältig transportieren",
-      "Schäden passieren sowieso, Schutz ist sinnlos",
-      "Das Gerät zu Hause lassen ist am sichersten"
-    ],
-    correct: 1,
-    explain: "Ein gutes Case und eine Schutzfolie schützen vor Kratzern und Sturzschäden. Dein Gerät ist teuer – behandle es entsprechend."
-  },
-  {
-    cat: "Datenschutz & Recht",
-    q: "Du möchtest ein Foto von der Tafel machen. Was ist zu beachten?",
-    opts: [
-      "So viel wie möglich fotografieren statt zuzuhören und mitzuschreiben",
-      "Nur mit ausdrücklicher Erlaubnis der Lehrkraft und ohne Mitschüler im Bild",
-      "Fotos der Tafel dürfen direkt ins Internet gestellt werden",
-      "Mitschüler beim Schreiben zu fotografieren und in der Gruppe zu teilen ist okay"
-    ],
-    correct: 1,
-    explain: "Unterrichtsmaterialien urheberrechtlich geschützt sein können. Mitschüler dürfen ohne Erlaubnis nicht fotografiert werden."
-  },
-  {
-    cat: "Dateiorganisation",
-    q: "Welche Ordnerstruktur ist für deine Schuldokumente sinnvoll?",
-    opts: [
-      "Alle Dateien direkt auf dem Desktop ablegen",
-      "Alles im Downloads-Ordner lassen",
-      "Schule → Schuljahr → Fach → Thema mit klaren Dateinamen",
-      "Keine Struktur – die Suchfunktion findet alles"
-    ],
-    correct: 2,
-    explain: "Eine klare Hierarchie spart Zeit beim Suchen und hält deinen Speicher übersichtlich. Die Suchfunktion ist kein Ersatz für Ordnung."
-  },
-  {
-    cat: "Sicherheit",
-    q: "Du siehst ein unbekanntes offenes WLAN ('Free_School_WiFi'). Was tust du?",
-    opts: [
-      "Sofort verbinden – kostenloses WLAN ist praktisch",
-      "Verbinden und dann Schulpasswörter eingeben zum Testen",
-      "Vorsicht walten lassen, nicht verbinden und ggf. IT oder Lehrkraft informieren",
-      "Das Netzwerk ignorieren und vergessen"
-    ],
-    correct: 2,
-    explain: "Unbekannte WLANs können gefälschte Hotspots sein ('Evil Twin'-Angriff). Nur bekannte, vertrauenswürdige Netze nutzen."
-  }
-];
+const QUIZ_ACCESS_CODE = "AJG2025";
+const MIN_PASS_PERCENT  = 70;
+
+const QUIZ_BANK = {
+  pc: [
+    {
+      cat: "Verhaltenskodex & Schulregeln",
+      q: "Was bedeutet das Signal 'Deckel halb zu' am Amy Johnson Gymnasium?",
+      opts: [
+        "Den Laptop sofort herunterfahren und in die Tasche packen",
+        "Den Bildschirm auf ca. 45 Grad neigen, um Blickkontakt zur Lehrkraft herzustellen",
+        "Den Laptop ganz zuklappen, damit die Tastatur gesperrt wird",
+        "Auf stumm schalten, aber weiter tippen"
+      ],
+      correct: 1,
+      explain: "Die 45-Grad-Regel ermöglicht sofortigen Blickkontakt im Plenum, ohne dass das Gerät ausgeschaltet werden muss."
+    },
+    {
+      cat: "Dateiorganisation",
+      q: "Wie lautet die empfohlene Namenskonvention für Schuldokumente?",
+      opts: [
+        "hausaufgabe_final_v2.docx",
+        "JAHR-MONAT-TAG_Fach_Thema (z.B. 2026-09-17_Mathe_Analysis.pdf)",
+        "Nur der Name des Themas ohne Datum",
+        "Dateien müssen nicht benannt werden, die Windows-Suche reicht aus"
+      ],
+      correct: 1,
+      explain: "Das Format JAHR-MONAT-TAG_Fach_Thema sortiert Dateien automatisch in der perfekten chronologischen Reihenfolge."
+    },
+    {
+      cat: "Private Apps & Konzentration",
+      q: "Darfst du private Apps (wie Spiele, Spotify oder Discord) auf deinem Laptop installiert haben?",
+      opts: [
+        "Nein, auf Schulgeräten sind private Apps durch die Schulordnung streng verboten",
+        "Ja, sie dürfen auf dem privaten Gerät bleiben, während der Schulzeit gilt aber striktes Unterrichts-Tabu",
+        "Ja, man darf sie auch im Unterricht benutzen, solange der Ton aus ist",
+        "Nur wenn die Eltern eine schriftliche Genehmigung vorlegen"
+      ],
+      correct: 1,
+      explain: "Private Geräte dürfen private Apps enthalten. Im Unterricht sind diese jedoch ausnahmslos tabu."
+    },
+    {
+      cat: "Gerätesicherheit & Schutz",
+      q: "Mit welcher Tastenkombination sperrst du deinen Windows-Laptop blitzschnell, wenn du deinen Platz verlässt?",
+      opts: [
+        "Strg + Alt + Entf",
+        "Windows-Taste + L",
+        "Alt + F4",
+        "Windows-Taste + D"
+      ],
+      correct: 1,
+      explain: "Win + L sperrt den Bildschirm in unter einer Sekunde und verhindert unbefugten Zugriff."
+    },
+    {
+      cat: "Datenschutz & Aufnahmen",
+      q: "Ein Mitschüler macht im Unterricht eine lustige Bewegung. Darfst du ihn mit der Webcam kurz aufnehmen?",
+      opts: [
+        "Ja, solange es nur in der privaten Klassengruppe geteilt wird",
+        "Nein, Bild- und Tonaufnahmen ohne ausdrückliche Einwilligung sind nach § 201a StGB verboten",
+        "Ja, wenn der Lehrer gerade wegguckt",
+        "Ja, wenn es als Meme bearbeitet wird"
+      ],
+      correct: 1,
+      explain: "Ungefragte Foto-, Video- und Tonaufnahmen verletzen das Recht am eigenen Bild und sind strafbar."
+    },
+    {
+      cat: "KI & Quellenkompetenz",
+      q: "Wie darf ChatGPT oder eine andere KI für schulische Aufgaben genutzt werden?",
+      opts: [
+        "Man darf den KI-Text komplett kopieren und als eigene Hausaufgabe abgeben",
+        "Als Lern- und Rechercheassistenz mit kritischer Prüfung der Fakten und Transparenz im Quellenverzeichnis",
+        "KI ist an Schulen gesetzlich komplett verboten",
+        "Nur für Rechtschreibprüfung, keinesfalls zur Recherche"
+      ],
+      correct: 1,
+      explain: "KI ist ein Hilfswerkzeug. Reine Kopien gelten als Täuschungsversuch und werden mit ungenügend bewertet."
+    },
+    {
+      cat: "Netzwerk & Schule",
+      q: "Wie gehst du verantwortungsvoll mit dem Schul-WLAN um?",
+      opts: [
+        "Über externe VPN-Tunnel die Schul-Sperren für TikTok und Spiele umgehen",
+        "Große private Spiele-Updates herunterladen, weil das WLAN kostenlos ist",
+        "Ausschließlich für schulische Zwecke nutzen und keine unnötige Bandbreite belasten",
+        "Einen eigenen Hotspot für Mitschüler eröffnen"
+      ],
+      correct: 2,
+      explain: "Das Schulnetzwerk dient Bildungszwecken. Bandbreitenüberlastung oder VPN-Tunneling führen zum Netzausschluss."
+    },
+    {
+      cat: "Hardware & Akku",
+      q: "Welche Lade-Voraussetzung gilt zu Beginn jedes Schultags?",
+      opts: [
+        "Der Akku muss gar nicht geladen sein, es gibt überall Steckdosen",
+        "Das Gerät muss mindestens zu 80% geladen sein, Steckdosen sind Ausnahmen",
+        "Genau 50% reichen für den Tag",
+        "Man lässt das Ladekabel dauerhaft eingesteckt"
+      ],
+      correct: 1,
+      explain: "Schüler müssen mit einsatzbereiten Geräten erscheinen. Klassenraum-Steckdosen sind keine Dauerlösung."
+    },
+    {
+      cat: "Dateiorganisation & Backup",
+      q: "Warum ist das Ablegen wichtiger Referate auf dem Desktop riskant?",
+      opts: [
+        "Der Desktop wird langsamer",
+        "Weil lokale Desktop-Dateien bei Beschädigung oder Verlust des Geräts ohne Cloud-Sync unwiderruflich verloren sind",
+        "Desktop-Dateien können von Lehrkräften ferngesteuert gelöscht werden",
+        "Es gibt kein Risiko"
+      ],
+      correct: 1,
+      explain: "Dateien gehören in die synchronisierte Schulcloud (OneDrive), um vor Hardwaredefekten geschützt zu sein."
+    },
+    {
+      cat: "Tipps & Tricks",
+      q: "Welche Windows-Funktion hilft dir, Pings und Benachrichtigungen im Unterricht stummzuschalten?",
+      opts: [
+        "Der Flugzeugmodus (trennt auch das Schul-WLAN)",
+        "Die Windows 11 Fokus-Sitzung / Nicht-Stören-Modus",
+        "Der Energiesparmodus",
+        "Windows-Update erzwingen"
+      ],
+      correct: 1,
+      explain: "Die Fokus-Sitzung hält das WLAN für Schularbeiten aktiv, unterdrückt aber störende App-Benachrichtigungen."
+    }
+  ],
+
+  tablet: [
+    {
+      cat: "Verhaltenskodex & Schulregeln",
+      q: "Was besagt die 'Flach-Leg-Regel' für Tablets am Amy Johnson Gymnasium?",
+      opts: [
+        "Das Tablet muss auf den Boden gelegt werden",
+        "Auf Ansage wird das Tablet flach auf den Tisch gelegt und der Stift daneben abgelegt",
+        "Das Tablet wird mit der Schutzhülle hochkant hingestellt",
+        "Nur die Tastatur wird weggeklappt"
+      ],
+      correct: 1,
+      explain: "Die Flach-Leg-Regel stellt sicher, dass alle Blicke nach vorne gerichtet sind und niemand abgelenkt tippt."
+    },
+    {
+      cat: "GoodNotes & Ordnerstruktur",
+      q: "Wie organisiert man Notizen in GoodNotes oder Samsung Notes optimal?",
+      opts: [
+        "Alle Notizen auf der Startseite ohne Ordner ablegen",
+        "Für jedes Schulfach einen eigenen Ordner anlegen und darin Fächer-Hefte und PDF-Arbeitsblätter strukturieren",
+        "Jede Schulstunde ein neues Notizbuch anlegen",
+        "Notizen nur als unbenannte Quick-Notes führen"
+      ],
+      correct: 1,
+      explain: "Fächerordner verhindern das Notizen-Chaos und machen Skripte und Arbeitsblätter gezielt auffindbar."
+    },
+    {
+      cat: "Kamera & Tafelbilder",
+      q: "Wann darfst du im Unterricht ein Foto des Tafelbildes machen?",
+      opts: [
+        "Jederzeit ohne Nachfrage, Tafelbilder sind frei",
+        "Nur mit ausdrücklicher Erlaubnis der Lehrkraft und ohne dass Mitschüler im Bildausschnitt sind",
+        "Nur in den Pausen",
+        "Wenn man das Foto danach direkt in den Klassenchat stellt"
+      ],
+      correct: 1,
+      explain: "Tafelbilder dürfen nur nach Freigabe fotografiert werden. Mitschüler dürfen nicht abgebildet werden."
+    },
+    {
+      cat: "Netiquette & AirDrop",
+      q: "Was gilt bezüglich AirDrop / Quick Share während des Schultages?",
+      opts: [
+        "Memes und Späße dürfen frei im Klassenraum verschickt werden",
+        "AirDrop sollte auf 'Aus' oder 'Nur Kontakte' stehen; privates Versenden im Unterricht ist untersagt",
+        "AirDrop muss für alle dauerhaft geöffnet sein",
+        "Lehrkräfte dürfen über AirDrop Witze empfangen"
+      ],
+      correct: 1,
+      explain: "Ungefragtes Senden von Dateien über AirDrop/Quick Share stört den Unterricht massiv und ist verboten."
+    },
+    {
+      cat: "Private Apps & Konzentration",
+      q: "Wie kannst du dein Tablet vor der Verlockung von Social Media während der Schulzeit schützen?",
+      opts: [
+        "Das Tablet zu Hause lassen",
+        "Einen automatischen Fokus-Zeitplan 'Schule' (Mo–Fr) einrichten und private Apps auf Seite 2 verlagern",
+        "Alle Apps täglich deinstallieren",
+        "Auf Werkseinstellungen zurücksetzen"
+      ],
+      correct: 1,
+      explain: "Ein zeitgesteuerter Schul-Fokus filtert Benachrichtigungen zuverlässig, ohne dass Apps gelöscht werden müssen."
+    },
+    {
+      cat: "Datenschutz & Recht",
+      q: "Dürfen Mitschriften oder Arbeitsblätter von Lehrkräften im Internet öffentlich hochgeladen werden?",
+      opts: [
+        "Ja, alles was im Unterricht verteilt wird, gehört dem Schüler",
+        "Nein, urheberrechtlich geschützte Unterrichtsmaterialien dürfen nicht ohne Genehmigung veröffentlicht werden",
+        "Ja, solange man kein Geld dafür verlangt",
+        "Nur auf TikTok und Instagram"
+      ],
+      correct: 1,
+      explain: "Arbeitsblätter und Tafelaufschriebe unterliegen dem Urheberrecht der Verfasser und Schulen."
+    },
+    {
+      cat: "Produktivität & Apps",
+      q: "Wie nutzt du die Split-View-Funktion (geteiltes Display) sinnvoll im Unterricht?",
+      opts: [
+        "Links ein Spiel, rechts die Mitschrift",
+        "Links das Notizbuch (GoodNotes/Samsung Notes), rechts das Schulbuch-PDF oder Recherchematerial",
+        "Zwei Musik-Apps gleichzeitig laufen lassen",
+        "Split-View ist im Unterricht verboten"
+      ],
+      correct: 1,
+      explain: "Split-View ermöglicht paralleles Arbeiten mit Lehrbuch und Mitschrift ohne App-Wechsel."
+    },
+    {
+      cat: "Sicherheit & Verlust",
+      q: "Was solltest du auf deinem Tablet zwingend aktivieren, falls es in der Schule vergessen wird?",
+      opts: [
+        "Den Bluetooth-Sichtbarkeitsmodus",
+        "Die Ortungsfunktion ('Wo ist?' bei Apple bzw. 'SmartThings Find' bei Samsung) plus Sperrcode",
+        "Die automatische Rufannahme",
+        "Nichts, die Schule haftet immer"
+      ],
+      correct: 1,
+      explain: "Ortungsdienste und Gerätesperren schützen deine Daten bei Diebstahl oder Verlust wirksam."
+    },
+    {
+      cat: "KI & Lernen",
+      q: "Welche Haltung vertritt das Amy Johnson Gymnasium bezüglich KI-Tools wie ChatGPT?",
+      opts: [
+        "Vollständiges Verbot mit Taschenkontrollen",
+        "Verantwortungsvolle Nutzung als Lernhilfe, aber strenges Verbot von ungekennzeichneten Plagiaten",
+        "KI darf Klausuren für Schüler schreiben",
+        "KI existiert für den Schulunterricht nicht"
+      ],
+      correct: 1,
+      explain: "Transparenz und Eigenleistung stehen an erster Stelle. KI-Einsatz muss deklariert werden."
+    },
+    {
+      cat: "Hardware & Zubehör",
+      q: "Was gehört zur unverzichtbaren Schutzausstattung eines Schul-Tablets?",
+      opts: [
+        "Nur ein cooler Sticker",
+        "Eine stoßfeste Schutzhülle (idealerweise mit Displayschutz) und eine sichere Stifthalterung",
+        "Auf keinen Fall eine Hülle, das Tablet muss leicht sein",
+        "Eine dauerhafte Strombank am Schreibtisch"
+      ],
+      correct: 1,
+      explain: "Ein Schul-Tablet ist ständigen Transport- und Stoßbelastungen ausgesetzt und benötigt soliden Schutz."
+    }
+  ]
+};

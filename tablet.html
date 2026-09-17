@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tablet-Modul &amp; Notizen-Simulator – Digitaler Führerschein (2026)</title>
+  <title>Tablet Lernpfad (GoodNotes &amp; Android) – Amy Johnson Gymnasium (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,321 +16,148 @@
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
-    <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC-Simulator</a></li>
-    <li><a href="tablet.html" class="active">📱 Tablet-Simulator</a></li>
-    <li><a href="quiz.html">📝 Prüfung</a></li>
-    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+    <li><a href="index.html">Startseite</a></li>
+    <li><a href="pc.html">💻 Laptop (Windows 11)</a></li>
+    <li><a href="tablet.html" class="active">📱 Tablet (GoodNotes &amp; Android)</a></li>
+    <li><a href="quiz.html?track=pc">📝 Prüfung Laptop</a></li>
+    <li><a href="quiz.html?track=tablet">📝 Prüfung Tablet</a></li>
   </ul>
 </nav>
 
-<div class="module-wrap">
-  <aside class="sidebar">
-    <div class="sidebar-head">
-      <h2>📱 Tablet (iPad &amp; Samsung)</h2>
-      <p id="prog-text">0 von 8 Kapiteln abgeschlossen</p>
-      <div class="sidebar-prog"><div class="sidebar-prog-bar" id="prog-bar" style="width:0%"></div></div>
+<main class="learn-wrapper">
+  <!-- TRACK HEADER -->
+  <div class="track-header">
+    <div class="track-info">
+      <span class="lesson-tag">Offizieller Lernpfad</span>
+      <h1 id="track-title">Tablet-Führerschein (iPad &amp; Samsung)</h1>
+      <p id="track-sub">GoodNotes-Ordnerstruktur, digitaler Stift und rechtssichere Nutzung am Amy Johnson Gymnasium</p>
     </div>
-    <ul class="chapter-nav" id="chapter-nav"></ul>
-  </aside>
-  
-  <main class="content-area" id="content-area">
-    <p style="color:var(--text-sec)">Kapitel wird geladen...</p>
-  </main>
-</div>
+    <div class="track-switch">
+      <a href="pc.html" class="track-btn">💻 PC / Laptop</a>
+      <a href="tablet.html" class="track-btn active">📱 Tablet</a>
+    </div>
+  </div>
+
+  <!-- HORIZONTAL STEPPER -->
+  <div class="lesson-stepper" id="lesson-stepper">
+    <div class="step-card active" data-step="0">
+      <div class="step-num-badge">1</div>
+      <div class="step-meta">
+        <strong>Anständige Nutzung</strong>
+        <small>Flach-Leg-Regel &amp; AirDrop</small>
+      </div>
+    </div>
+    <div class="step-card" data-step="1">
+      <div class="step-num-badge">2</div>
+      <div class="step-meta">
+        <strong>GoodNotes strukturieren</strong>
+        <small>Interaktiver Ordner-Manager</small>
+      </div>
+    </div>
+    <div class="step-card" data-step="2">
+      <div class="step-num-badge">3</div>
+      <div class="step-meta">
+        <strong>Tipps, Hacks &amp; Tafelrecht</strong>
+        <small>Reizunterdrückung &amp; Fotos</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON CONTAINER -->
+  <article class="lesson-container fade-up" id="lesson-view"></article>
+</main>
 
 <footer class="footer">
-  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <div class="footer-container">
+    <div>
+      <h4>Amy-Johnson-Gymnasium</h4>
+      <p>Staatliches Gymnasium des Landkreises Dahme-Spreewald<br>
+      Pestalozzistraße 1, 12529 Schönefeld<br>
+      Besucheradresse: Alt-Schönefeld 41</p>
+      <p style="margin-top:0.6rem;">Telefon: <a href="tel:03022029310">030 220 2931-0</a><br>
+      E-Mail: <a href="mailto:sekretariat.121368@lk.brandenburg.de">sekretariat.121368@lk.brandenburg.de</a></p>
+    </div>
+    <div>
+      <h4>Lernplattform</h4>
+      <ul>
+        <li><a href="pc.html">Laptop-Lernpfad (Windows 11)</a></li>
+        <li><a href="tablet.html">Tablet-Lernpfad (GoodNotes)</a></li>
+        <li><a href="quiz.html?track=pc">Abschlussprüfung Laptop</a></li>
+        <li><a href="quiz.html?track=tablet">Abschlussprüfung Tablet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Entwicklung &amp; IT</h4>
+      <p>Entwickelt von: <strong>Phil12992</strong><br>
+      Projekt: <em>Digitaler Führerschein AJG</em><br>
+      Stand: Schuljahr 2026<br>
+      Hosting: GitHub Pages (SSL verschlüsselt)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Amy Johnson Gymnasium &middot; Alle Rechte vorbehalten. Gültig für alle Jahrgangsstufen.
+  </div>
 </footer>
 
-<script src="js/app.js"></script>
-<script src="js/tablet-sim.js"></script>
+<script src="js/learn-data.js"></script>
+<script src="js/goodnotes-sim.js"></script>
 <script>
-const MOD = "tablet";
+const TRACK_KEY = 'tablet';
+let currentLessonIdx = 0;
 
-const CHAPTERS = [
-  {
-    icon: "⚙️",
-    title: "1. iPad oder Samsung einrichten",
-    tag: "Kapitel 1",
-    desc: "Apple ID vs. Samsung Account, Touch/Face ID und Cloud-Anbindung.",
-    content: `
-      <div class="content-block">
-        <h2>Welches Tablet nutzt du in der Schule?</h2>
-        <p>Egal ob Apple iPad mit iPadOS oder Samsung Galaxy Tab mit Android: Beide Plattformen sind in der Oberstufe des Amy Johnson Gymnasiums zugelassen, wenn sie mit Stiftunterstützung und Displayschutz betrieben werden.</p>
+function renderLesson(idx) {
+  currentLessonIdx = idx;
+  const track = PATH_DATA[TRACK_KEY];
+  const lesson = track.lessons[idx];
+  const view = document.getElementById('lesson-view');
 
-        <div class="rules-grid">
-          <div class="rule-box permit">
-            <h3>🍎 Apple iPad (iPadOS)</h3>
-            <p>• Apple ID (idealerweise mit iCloud-Backup aktiviert)<br>
-               • Face ID oder Touch ID als Sperrschutz<br>
-               • "Wo ist?" (Mein iPad suchen) zwingend aktivieren!</p>
-          </div>
-          <div class="rule-box permit">
-            <h3>📱 Samsung Galaxy Tab (Android)</h3>
-            <p>• Google- &amp; Samsung-Konto verbunden<br>
-               • Fingerabdruck oder starkes Entsperrmuster<br>
-               • SmartThings Find zur Ortung bei Verlust aktiv</p>
-          </div>
-        </div>
-
-        <h2>Checkliste: Ersteinstellungen (Klicke zum Abhaken)</h2>
-        <ul class="checklist">
-          <li><span class="cl-box"></span><span>Bildschirmsperre auf maximal 2 Minuten Nichtbenutzung eingestellt</span></li>
-          <li><span class="cl-box"></span><span>Bluetooth für Apple Pencil bzw. S-Pen gekoppelt</span></li>
-          <li><span class="cl-box"></span><span>Schul-WLAN mit persönlichen Zugangsdaten eingerichtet</span></li>
-          <li><span class="cl-box"></span><span>Displayschutzfolie (Panzerglas oder 'Paperlike') angebracht</span></li>
-        </ul>
-      </div>`
-  },
-  {
-    icon: "🖊️",
-    title: "2. Notizen-Simulator: GoodNotes & Notes",
-    tag: "Kapitel 2 · INTERAKTIV",
-    desc: "Probiere den interaktiven Canvas aus: Werkzeuge, Farben, Stift und Radierer live testen!",
-    content: `
-      <div class="content-block">
-        <h2>Handschrift &amp; PDF-Annotation im Praxistest</h2>
-        <p>Probiere die interaktive Arbeitsfläche direkt hier aus! Wähle verschiedene Stifte, Textmarker oder den Radierer und simuliere eine handschriftliche Mathemitschrift auf einem importierten PDF-Arbeitsblatt:</p>
-
-        <!-- CONTAINER FÜR DEN TABLET NOTIZEN-SIMULATOR -->
-        <div id="tablet-sim-root"></div>
-
-        <div class="ibox tip" style="margin-top:1.5rem;">
-          <span class="ibox-icon">💡</span>
-          <div class="ibox-body">
-            <strong>GoodNotes 6 vs. Samsung Notes</strong>
-            <p>• <strong>GoodNotes (iPad):</strong> Unangefochtener Standard für Apple-Geräte mit hervorragender Suchfunktion über deine Handschrift.<br>
-               • <strong>Samsung Notes (Galaxy Tab):</strong> Kostenlos vorinstalliert, extrem latenzarm mit dem S-Pen und exportiert auf Wunsch direkt als Word- oder PDF-Dokument.</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "📂",
-    title: "3. Hefte & Ordnerorganisation",
-    tag: "Kapitel 3",
-    desc: "Fächer-Struktur, digitale Register und das Ende der Zettelwirtschaft.",
-    content: `
-      <div class="content-block">
-        <h2>Vom Chaos zum strukturierten 15-Punkte-Hefter</h2>
-        <p>In der Oberstufe darfst du Dokumente nicht wahllos in die Notizen-App 'werfen'. Richte dir für jedes Fach eine klare Struktur ein:</p>
-
-        <div class="ibox ok">
-          <span class="ibox-icon">📑</span>
-          <div class="ibox-body">
-            <strong>Empfohlener Aufbau pro Notizbuch:</strong>
-            <ul>
-              <li><strong>Deckblatt:</strong> Fach, Halbjahr (z.B. Q1.1), Fachlehrkraft</li>
-              <li><strong>Kapitel-Register:</strong> z.B. 1. Analysis, 2. Lineare Algebra, 3. Stochastik</li>
-              <li><strong>Datum auf jeder Seite:</strong> z.B. <code>17.09.2026 – Kurvendiskussion</code></li>
-            </ul>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "🎯",
-    title: "4. Reizunterdrückung am Tablet",
-    tag: "Kapitel 4 · WICHTIG",
-    desc: "Wie du Social Media, Benachrichtigungen und Spiele während der Schulzeit abstellst.",
-    content: `
-      <div class="content-block">
-        <h2>Tablets als Ablenkungsfalle Nr. 1</h2>
-        <p>Weil Tablets oft auch privat auf dem Sofa genutzt werden, ist der Drang groß, im Unterricht kurz Instagram, TikTok oder Spiele zu öffnen.</p>
-
-        <div class="rules-grid">
-          <div class="rule-box permit">
-            <h3>✅ Private Apps erlaubt</h3>
-            <p>Deine privaten Apps dürfen auf dem Tablet bleiben. Du musst dein Gerät nicht komplett für Privates sperren.</p>
-          </div>
-          <div class="rule-box forbid">
-            <h3>🚫 Unterrichts-Tabu</h3>
-            <p>Wer während des Unterrichts beim Zocken, Streamen oder privaten Chatten erwischt wird, muss das Tablet sofort abgeben.</p>
-          </div>
-        </div>
-
-        <h2>Wie stelle ich den Reiz ab? Praktische Tablet-Tricks:</h2>
-        <div class="ibox tip">
-          <span class="ibox-icon">💡</span>
-          <div class="ibox-body">
-            <strong>1. Fokus 'Schule' mit automatischem Zeitplan</strong>
-            <p>Richte unter <em>Einstellungen > Fokus (iPad)</em> bzw. <em>Modi &amp; Routinen (Samsung)</em> ein Schul-Profil ein, das automatisch von Mo–Fr 08:00 bis 15:30 Uhr aktiv ist. Nur Notiz- und Schul-Apps dürfen Töne von sich geben!</p>
-          </div>
-        </div>
-        <div class="ibox info">
-          <span class="ibox-icon">📱</span>
-          <div class="ibox-body">
-            <strong>2. Der 'Zweite Homescreen'-Trick</strong>
-            <p>Lege alle privaten Apps (Spiele, Social Media, Netflix) auf Seite 2 oder in einen separaten Ordner namens 'Freizeit'. Der Haupt-Homescreen enthält NUR Schul-Apps.</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "📷",
-    title: "5. Kamera-Nutzung & Tafelbilder",
-    tag: "Kapitel 5",
-    desc: "Recht am Bild, Tafelaufschriebe und Persönlichkeitsschutz.",
-    content: `
-      <div class="content-block">
-        <h2>Darf ich die Tafel einfach abfotografieren?</h2>
-        <p>Nur wenn die unterrichtende Lehrkraft es <strong>ausdrücklich gestattet</strong>!</p>
-        
-        <div class="ibox warn">
-          <span class="ibox-icon">⚠️</span>
-          <div class="ibox-body">
-            <strong>Datenschutz &amp; Mitschüler-Schutz</strong>
-            <p>Wenn du die Tafel fotografierst, dürfen <strong>keine Mitschüler oder Lehrkräfte</strong> im Bildausschnitt sein. Bilder sofort beschneiden oder Dokumenten-Scan-Modus der Notizen-App nutzen!</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "🤖",
-    title: "6. KI-Tools & Recherche",
-    tag: "Kapitel 6",
-    desc: "ChatGPT, DeepL und digitale Wörterbücher in Klausuren und Unterricht.",
-    content: `
-      <div class="content-block">
-        <h2>KI auf dem Tablet sinnvoll einbinden</h2>
-        <p>Nutze Split-Screen (geteiltes Display): Links deine GoodNotes-Mitschrift, rechts die Recherche-App oder Wikipedia.</p>
-        
-        <div class="ibox ok">
-          <span class="ibox-icon">💡</span>
-          <div class="ibox-body">
-            <strong>Split-View Produktivität</strong>
-            <p>Auf dem iPad: Ziehe die zweite App aus dem Dock nach rechts. Auf Samsung: Öffne die App-Übersicht und wähle 'In geteilter Bildschirmansicht öffnen'.</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "🛡️",
-    title: "7. Hardware-Pflege & Akkumanagement",
-    tag: "Kapitel 7",
-    desc: "Schutzhülle, Stiftspitzen-Verschleiß und Akku-Lebensdauer.",
-    content: `
-      <div class="content-block">
-        <h2>Damit dein Tablet das Abitur überlebt</h2>
-        <ul class="checklist">
-          <li><span class="cl-box"></span><span>Sturzsichere Hülle mit Kantenschutz und Stifthalter</span></li>
-          <li><span class="cl-box"></span><span>Akkuschonung (Ladelimit bei 85% in den Einstellungen aktiviert)</span></li>
-          <li><span class="cl-box"></span><span>Ersatz-Stiftspitzen in der Schultasche griffbereit</span></li>
-          <li><span class="cl-box"></span><span>Tablet niemals offen auf der Tischkante ablegen</span></li>
-        </ul>
-      </div>`
-  },
-  {
-    icon: "📜",
-    title: "8. Amy Johnson Tablet-Regeln (2026)",
-    tag: "Kapitel 8",
-    desc: "Verbindliche Vereinbarung für die Nutzung in der gymnasialen Oberstufe.",
-    content: `
-      <div class="content-block">
-        <h2>Schulvereinbarung zur Tablet-Nutzung</h2>
-        
-        <div class="rules-grid">
-          <div class="rule-box permit">
-            <h3>Regel 1: Display flach hinlegen</h3>
-            <p>Auf Aufforderung wird das Tablet flach auf den Tisch gelegt oder der Stift aus der Hand gelegt, damit die Aufmerksamkeit im Plenum liegt.</p>
-          </div>
-          <div class="rule-box forbid">
-            <h3>Regel 2: Kein AirDrop / Quick Share Unfug</h3>
-            <p>Das Versenden von Memes oder privaten Dateien im Unterricht via AirDrop / Quick Share ist strengstens untersagt.</p>
-          </div>
-          <div class="rule-box permit">
-            <h3>Regel 3: Eigenverantwortung bei Backups</h3>
-            <p>Jeder Schüler ist für die Synchronisation mit iCloud bzw. Google Drive selbst verantwortlich. Technische Ausreden bei Hausaufgaben zählen nicht.</p>
-          </div>
-          <div class="rule-box trick">
-            <h3>[Platzhalter für weitere Schulregeln]</h3>
-            <p>Weitere schulspezifische Regelungen für das Amy Johnson Gymnasium werden hier ergänzt.</p>
-          </div>
-        </div>
-
-        <div class="ibox ok" style="margin-top:1.5rem;">
-          <span class="ibox-icon">🎓</span>
-          <div class="ibox-body">
-            <strong>Bereit für den Abschlusstest?</strong>
-            <p>Du hast das Tablet-Modul abgeschlossen. Starte nun das Abschlussquiz mit deinem Zugangscode!</p>
-          </div>
-        </div>
-      </div>`
-  }
-];
-
-let current = 0;
-
-function renderNav() {
-  const nav = document.getElementById('chapter-nav');
-  if (!nav) return;
-  nav.innerHTML = '';
-  const done = countDone(MOD, CHAPTERS.length);
-  document.getElementById('prog-text').textContent = done + ' von ' + CHAPTERS.length + ' Kapiteln abgeschlossen';
-  document.getElementById('prog-bar').style.width = Math.round((done / CHAPTERS.length) * 100) + '%';
-  
-  CHAPTERS.forEach((ch, i) => {
-    const li = document.createElement('li');
-    const isDone = isChapterDone(MOD, i);
-    li.className = (i === current ? 'active ' : '') + (isDone ? 'done' : '');
-    li.innerHTML = '<span class="ch-dot">' + (isDone ? '✓' : (i + 1)) + '</span>' + ch.icon + ' ' + ch.title;
-    li.addEventListener('click', () => { 
-      current = i; 
-      renderChapter(); 
-      renderNav(); 
-    });
-    nav.appendChild(li);
+  document.querySelectorAll('.step-card').forEach((card, i) => {
+    card.classList.toggle('active', i === idx);
+    const isDone = localStorage.getItem(`done_${TRACK_KEY}_${i}`) === '1';
+    card.classList.toggle('is-done', isDone);
+    if (isDone) card.querySelector('.step-num-badge').textContent = '✓';
+    else card.querySelector('.step-num-badge').textContent = i + 1;
   });
-}
 
-function renderChapter() {
-  const ch = CHAPTERS[current];
-  const area = document.getElementById('content-area');
-  const isDone = isChapterDone(MOD, current);
-  
-  area.innerHTML = '<div class="ch-header fade-up">' +
-    '<span class="ch-tag">' + ch.tag + '</span>' +
-    '<h1>' + ch.icon + ' ' + ch.title + '</h1>' +
-    '<p>' + ch.desc + '</p>' +
-    '</div>' +
-    ch.content +
-    '<div class="ch-actions">' +
-    '<button class="btn btn-success" onclick="markDone()">' +
-    (isDone ? '✓ Kapitel abgeschlossen' : '✓ Als gelernt markieren') +
-    '</button>' +
-    (current < CHAPTERS.length - 1 ? '<button class="btn btn-outline" onclick="nextChapter()">Nächstes Kapitel &rarr;</button>' : '') +
-    (current === CHAPTERS.length - 1 ? '<a href="quiz.html" class="btn btn-accent">Zum Abschlussquiz &rarr;</a>' : '') +
-    '</div>';
+  view.innerHTML = `
+    <div class="lesson-top-meta">
+      <span class="lesson-tag">${lesson.number} · ${lesson.category}</span>
+      <span class="lesson-time">⏱ Lesezeit: ${lesson.readTime}</span>
+    </div>
+    <h1 class="lesson-title">${lesson.title}</h1>
+    <div class="lesson-summary">${lesson.summary}</div>
+    ${lesson.content}
+    <div class="lesson-actions">
+      <button class="btn btn-success" onclick="markLessonDone(${idx})">
+        ${localStorage.getItem(`done_${TRACK_KEY}_${idx}`) === '1' ? '✓ Lektion bereits erledigt' : '✓ Lektion als gelernt markieren'}
+      </button>
+      ${idx < track.lessons.length - 1 
+        ? `<button class="btn btn-primary" onclick="renderLesson(${idx + 1})">Nächste Lektion &rarr;</button>` 
+        : `<a href="quiz.html?track=tablet" class="btn btn-accent btn-lg">Zur Abschlussprüfung Tablet &rarr;</a>`
+      }
+    </div>
+  `;
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 200);
 
-  // Falls Kapitel 2 gewählt wurde: Tablet Simulator starten!
-  if (current === 1 && document.getElementById('tablet-sim-root')) {
-    window.tabSim = new TabletAppSimulator('tablet-sim-root');
+  if (idx === 1 && document.getElementById('lesson-tab-sim-container')) {
+    window.gnSim = new GoodNotesFolderSimulator('lesson-tab-sim-container');
   }
-
-  // Persistent Checklists initialisieren
-  initChecklists();
 }
 
-function markDone() {
-  saveChapterDone(MOD, current);
-  renderNav();
-  renderChapter();
-}
-
-function nextChapter() {
-  if (current < CHAPTERS.length - 1) { 
-    current++; 
-    renderChapter(); 
-    renderNav(); 
-  }
+function markLessonDone(idx) {
+  localStorage.setItem(`done_${TRACK_KEY}_${idx}`, '1');
+  renderLesson(idx);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderNav();
-  renderChapter();
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const step = parseInt(card.getAttribute('data-step'));
+      renderLesson(step);
+    });
+  });
+  renderLesson(0);
 });
 </script>
 </body>

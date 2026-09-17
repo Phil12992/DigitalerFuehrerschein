@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PC-Modul &amp; Dateimanager-Simulator – Digitaler Führerschein (2026)</title>
+  <title>Windows 11 Lernpfad – Amy Johnson Gymnasium (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,327 +16,150 @@
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
-    <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html" class="active">💻 PC-Simulator</a></li>
-    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
-    <li><a href="quiz.html">📝 Prüfung</a></li>
-    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+    <li><a href="index.html">Startseite</a></li>
+    <li><a href="pc.html" class="active">💻 Laptop (Windows 11)</a></li>
+    <li><a href="tablet.html">📱 Tablet (GoodNotes &amp; Android)</a></li>
+    <li><a href="quiz.html?track=pc">📝 Prüfung Laptop</a></li>
+    <li><a href="quiz.html?track=tablet">📝 Prüfung Tablet</a></li>
   </ul>
 </nav>
 
-<div class="module-wrap">
-  <aside class="sidebar">
-    <div class="sidebar-head">
-      <h2>💻 PC / Windows 11</h2>
-      <p id="prog-text">0 von 8 Kapiteln abgeschlossen</p>
-      <div class="sidebar-prog"><div class="sidebar-prog-bar" id="prog-bar" style="width:0%"></div></div>
+<main class="learn-wrapper">
+  <!-- TRACK HEADER -->
+  <div class="track-header">
+    <div class="track-info">
+      <span class="lesson-tag">Offizieller Lernpfad</span>
+      <h1 id="track-title">Windows 11 Laptop-Führerschein</h1>
+      <p id="track-sub">Lerne die 3 Kernkompetenzen für den Unterricht am Amy Johnson Gymnasium</p>
     </div>
-    <ul class="chapter-nav" id="chapter-nav"></ul>
-  </aside>
-  
-  <main class="content-area" id="content-area">
-    <!-- WIRD DYNAMISCH DURCH JAVASCRIPT GEFÜLLT -->
-    <p style="color:var(--text-sec)">Kapitel wird geladen...</p>
-  </main>
-</div>
+    <div class="track-switch">
+      <a href="pc.html" class="track-btn active">💻 PC / Laptop</a>
+      <a href="tablet.html" class="track-btn">📱 Tablet</a>
+    </div>
+  </div>
+
+  <!-- HORIZONTAL STEPPER -->
+  <div class="lesson-stepper" id="lesson-stepper">
+    <div class="step-card active" data-step="0">
+      <div class="step-num-badge">1</div>
+      <div class="step-meta">
+        <strong>Anständige Nutzung</strong>
+        <small>Verhaltenskodex &amp; Recht</small>
+      </div>
+    </div>
+    <div class="step-card" data-step="1">
+      <div class="step-num-badge">2</div>
+      <div class="step-meta">
+        <strong>Gerät organisieren</strong>
+        <small>Dateimanager-Praxis</small>
+      </div>
+    </div>
+    <div class="step-card" data-step="2">
+      <div class="step-num-badge">3</div>
+      <div class="step-meta">
+        <strong>Tipps &amp; Hacks</strong>
+        <small>Fokus &amp; Effizienz</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- LESSON CONTAINER -->
+  <article class="lesson-container fade-up" id="lesson-view"></article>
+</main>
 
 <footer class="footer">
-  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <div class="footer-container">
+    <div>
+      <h4>Amy-Johnson-Gymnasium</h4>
+      <p>Staatliches Gymnasium des Landkreises Dahme-Spreewald<br>
+      Pestalozzistraße 1, 12529 Schönefeld<br>
+      Besucheradresse: Alt-Schönefeld 41</p>
+      <p style="margin-top:0.6rem;">Telefon: <a href="tel:03022029310">030 220 2931-0</a><br>
+      E-Mail: <a href="mailto:sekretariat.121368@lk.brandenburg.de">sekretariat.121368@lk.brandenburg.de</a></p>
+    </div>
+    <div>
+      <h4>Lernplattform</h4>
+      <ul>
+        <li><a href="pc.html">Laptop-Lernpfad (Windows 11)</a></li>
+        <li><a href="tablet.html">Tablet-Lernpfad (GoodNotes)</a></li>
+        <li><a href="quiz.html?track=pc">Abschlussprüfung Laptop</a></li>
+        <li><a href="quiz.html?track=tablet">Abschlussprüfung Tablet</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Entwicklung &amp; IT</h4>
+      <p>Entwickelt von: <strong>Phil12992</strong><br>
+      Projekt: <em>Digitaler Führerschein AJG</em><br>
+      Stand: Schuljahr 2026<br>
+      Hosting: GitHub Pages (SSL verschlüsselt)</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 Amy Johnson Gymnasium &middot; Alle Rechte vorbehalten. Gültig für alle Jahrgangsstufen.
+  </div>
 </footer>
 
-<script src="js/app.js"></script>
-<script src="js/simulator.js"></script>
+<script src="js/learn-data.js"></script>
+<script src="js/explorer-sim.js"></script>
 <script>
-const MOD = "pc";
-const CHAPTERS = [
-  {
-    icon: "🔐",
-    title: "1. Windows 11 sicher einrichten",
-    tag: "Kapitel 1",
-    desc: "Sichere Benutzeranmeldung, Windows Hello und Schutz vor unbefugtem Zugriff.",
-    content: `
-      <div class="content-block">
-        <h2>Windows-Anmeldung für den Schulalltag</h2>
-        <p>In der Oberstufe wechselst du oft den Raum. Dein Laptop muss davor geschützt sein, dass Mitschüler deine Daten einsehen, manipulieren oder in deinem Namen Nachrichten versenden.</p>
-        
-        <div class="ibox tip">
-          <span class="ibox-icon">💡</span>
-          <div class="ibox-body">
-            <strong>Tastenkombination des Tages: [Win] + [L]</strong>
-            <p>Gewöhne dir an, jedes Mal wenn du deinen Stuhl verlässt, sofort <code>Win + L</code> zu drücken. Das sperrt den Bildschirm in weniger als einer Sekunde!</p>
-          </div>
-        </div>
+const TRACK_KEY = 'pc';
+let currentLessonIdx = 0;
 
-        <h2>Checkliste: Ersteinrichtung (Klicke zum Abhaken)</h2>
-        <ul class="checklist">
-          <li><span class="cl-box"></span><span>Windows Hello eingerichtet (sichere 6-stellige PIN oder Fingerabdruck)</span></li>
-          <li><span class="cl-box"></span><span>Automatische Bildschirmsperre auf maximal 3 Minuten eingestellt</span></li>
-          <li><span class="cl-box"></span><span>Windows Defender aktiviert und Virendefinitionen aktuell</span></li>
-          <li><span class="cl-box"></span><span>Schulkonto unter "Einstellungen > Konten > Auf Schule zugreifen" verbunden</span></li>
-        </ul>
-      </div>`
-  },
-  {
-    icon: "🗂️",
-    title: "2. Dateimanager-Simulator (Praxis)",
-    tag: "Kapitel 2 · INTERAKTIV",
-    desc: "Erledige die interaktiven Missionen im simulierten Explorer oder über die Live-PowerShell!",
-    content: `
-      <div class="content-block">
-        <h2>Echtes Praxistraining: VirtualFS Explorer &amp; CLI</h2>
-        <p>Genau wie bei einer professionellen Programmier-Lern-App: Bearbeite die Aufgaben direkt im folgenden Dateimanager. Du kannst entweder die grafischen Knöpfe nutzen oder echte Befehle in das Terminal tippen. Das System prüft deinen Fortschritt live!</p>
+function renderLesson(idx) {
+  currentLessonIdx = idx;
+  const track = PATH_DATA[TRACK_KEY];
+  const lesson = track.lessons[idx];
+  const view = document.getElementById('lesson-view');
 
-        <!-- CONTAINER FÜR DEN LIVE SIMULATOR -->
-        <div id="sim-app-root"></div>
-
-        <div class="ibox info" style="margin-top:1.5rem;">
-          <span class="ibox-icon">ℹ️</span>
-          <div class="ibox-body">
-            <strong>Dateinamen-Standard am Amy Johnson Gymnasium</strong>
-            <p>Benenne Dokumente immer nach der Formel: <code>JAHR-MONAT-TAG_Fach_Thema.pdf</code> (z.B. <code>2026-09-17_Mathe_Analysis.pdf</code>). So sortiert dein Computer automatisch chronologisch!</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "📂",
-    title: "3. Ordnerstruktur & Cloud-Sync",
-    tag: "Kapitel 3",
-    desc: "OneDrive-Integration, Backup-Strategien und Vermeidung von Datenverlust.",
-    content: `
-      <div class="content-block">
-        <h2>Schutz vor dem 'Mein Laptop ist kaputt'-Albtraum</h2>
-        <p>Nichts ist ärgerlicher als eine verlorene Facharbeit kurz vor der Abgabe. Deshalb gilt: Lokale Speicherung auf dem Desktop ist verboten!</p>
-        
-        <div class="ibox ok">
-          <span class="ibox-icon">☁️</span>
-          <div class="ibox-body">
-            <strong>Automatische Cloud-Sicherung</strong>
-            <p>Speichere deine Schulordner direkt in deinem Amy-Johnson-Schulkonto bei <strong>OneDrive</strong>. Wenn dein Laptop beschädigt wird oder verloren geht, kannst du dich an jedem Schul-PC anmelden und sofort weiterarbeiten.</p>
-          </div>
-        </div>
-
-        <h2>Checkliste: Datensicherheit</h2>
-        <ul class="checklist">
-          <li><span class="cl-box"></span><span>OneDrive-Client ist auf dem Laptop installiert und angemeldet</span></li>
-          <li><span class="cl-box"></span><span>Schulordner liegt im synchronisierten OneDrive-Verzeichnis</span></li>
-          <li><span class="cl-box"></span><span>Der Desktop enthält nur temporäre Verknüpfungen, keine Originaldokumente</span></li>
-          <li><span class="cl-box"></span><span>Wichtige Zwischenstände von Referaten haben ein Versionsdatum</span></li>
-        </ul>
-      </div>`
-  },
-  {
-    icon: "📦",
-    title: "4. Programme & Office 365",
-    tag: "Kapitel 4",
-    desc: "Word, PowerPoint, OneNote und unverzichtbare kostenlose Werkzeuge.",
-    content: `
-      <div class="content-block">
-        <h2>Empfohlene Software-Ausstattung</h2>
-        <p>Mit deinem Schulkonto hast du Zugriff auf die Microsoft 365 Bildungslizenz.</p>
-        
-        <div class="app-grid">
-          <div class="app-card"><span class="app-icon">📘</span><div class="app-info"><strong>Word</strong><span>Hausarbeiten, Protokolle, Facharbeit</span><span class="app-free">Über Schulkonto</span></div></div>
-          <div class="app-card"><span class="app-icon">📙</span><div class="app-info"><strong>PowerPoint</strong><span>Präsentationen für GFS / Kolloquien</span><span class="app-free">Über Schulkonto</span></div></div>
-          <div class="app-card"><span class="app-icon">📓</span><div class="app-info"><strong>OneNote</strong><span>Digitale Hefter &amp; Mitschriften</span><span class="app-free">Über Schulkonto</span></div></div>
-          <div class="app-card"><span class="app-icon">📊</span><div class="app-info"><strong>Excel</strong><span>Messwerttabellen in Physik/Chemie</span><span class="app-free">Über Schulkonto</span></div></div>
-          <div class="app-card"><span class="app-icon">💬</span><div class="app-info"><strong>Microsoft Teams</strong><span>Unterrichtsmaterialien &amp; Kursgruppen</span><span class="app-free">Schulplattform</span></div></div>
-          <div class="app-card"><span class="app-icon">📚</span><div class="app-info"><strong>Zotero</strong><span>Automatisches Zitieren &amp; Quellenverzeichnis</span><span class="app-free">Open Source</span></div></div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "🎯",
-    title: "5. Reizunterdrückung & Fokus",
-    tag: "Kapitel 5 · WICHTIG",
-    desc: "Private Apps behalten, aber im Unterricht nicht der Verlockung erliegen.",
-    content: `
-      <div class="content-block">
-        <h2>Die Psychologie der Verlockung im Unterricht</h2>
-        <p>Ein offener Tab mit YouTube, Discord-Pings oder Steam-Benachrichtigungen zerstören deine Konzentrationsspanne nachweislich innerhalb von Sekunden.</p>
-        
-        <div class="rules-grid">
-          <div class="rule-box permit">
-            <h3>✅ Private Apps auf Schulgeräten</h3>
-            <p>Es ist dir erlaubt, deine privaten Programme (Spiele, Streaming, Social Media) auf deinem Laptop zu installieren. Das Gerät gehört dir.</p>
-          </div>
-          <div class="rule-box forbid">
-            <h3>🚫 Absolute Unterrichtsruhe</h3>
-            <p>Während der gesamten Stunde dürfen keine privaten Anwendungen im Vorder- oder Hintergrund laufen. Auch kein "Ich höre nur Musik über Kopfhörer" ohne Erlaubnis.</p>
-          </div>
-        </div>
-
-        <h2>Wie stelle ich den Reiz ab? Praktische Tricks:</h2>
-        <div class="ibox tip">
-          <span class="ibox-icon">💡</span>
-          <div class="ibox-body">
-            <strong>1. Der Graustufen-Hack (Windows: [Win] + [Strg] + [C])</strong>
-            <p>Aktiviere unter <em>Einstellungen > Barrierefreiheit > Farbfilter</em> die Graustufen. Ohne bunte Farben verlieren Social-Media-Apps und Spiele über 80% ihrer psychologischen Anziehungskraft auf dein Gehirn!</p>
-          </div>
-        </div>
-        <div class="ibox info">
-          <span class="ibox-icon">⚙️</span>
-          <div class="ibox-body">
-            <strong>2. Windows 11 Fokus-Sitzung</strong>
-            <p>Klicke unten rechts auf die Uhr und starte eine "Fokus-Sitzung" (z.B. 45 oder 90 Minuten). Benachrichtigungen von WhatsApp Web, Discord etc. werden automatisch stummgeschaltet.</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "🤖",
-    title: "6. KI-Nutzung & Quellenrecht",
-    tag: "Kapitel 6",
-    desc: "ChatGPT, Copilot & Co. legal und sinnvoll als Lernassistenz einsetzen.",
-    content: `
-      <div class="content-block">
-        <h2>KI in der Oberstufe: Werkzeug, kein Ghostwriter</h2>
-        <p>Moderne Sprachmodelle gehören heute zum Alltag. Die Amy Johnson Gymnasium fördert Medienkompetenz – aber Täuschungsversuche haben schwere Konsequenzen.</p>
-
-        <div class="ibox warn">
-          <span class="ibox-icon">⚠️</span>
-          <div class="ibox-body">
-            <strong>Täuschungsversuch vs. Lernhilfe</strong>
-            <ul>
-              <li><strong>Plagiat (Note: ungenügend / 0 Punkte):</strong> Einen Aufsatz oder eine Lösung von ChatGPT schreiben lassen und als eigene Leistung einreichen.</li>
-              <li><strong>Erlaubt &amp; gefördert:</strong> KI zur Gliederungserstellung, Erklärung schwieriger mathematischer Konzepte oder Rechtschreibprüfung nutzen – mit entsprechender Angabe im Quellenverzeichnis!</li>
-            </ul>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "⚖️",
-    title: "7. Netiquette & Recht am Bild",
-    tag: "Kapitel 7",
-    desc: "Strafrechtliche Grenzen: Fotos, Audioaufnahmen und respektvolle Mails.",
-    content: `
-      <div class="content-block">
-        <h2>Recht am eigenen Bild (§ 201a &amp; § 22 KUG)</h2>
-        <p>Das ungefragte Fotografieren, Filmen oder Tonaufzeichnen von Mitschülern oder Lehrkräften ist kein Streich, sondern eine <strong>Straftat</strong>!</p>
-        
-        <div class="ibox warn">
-          <span class="ibox-icon">🚫</span>
-          <div class="ibox-body">
-            <strong>Strikte Verbote am Amy Johnson Gymnasium</strong>
-            <p>• Niemals Mitschüler im Klassenraum fotografieren oder filmen.<br>
-               • Tafelbilder dürfen nur mit ausdrücklicher Genehmigung der Lehrkraft abfotografiert werden.<br>
-               • Das Teilen von Unterrichtsaufnahmen auf Social Media führt zum sofortigen Schulausschluss und rechtlichen Schritten.</p>
-          </div>
-        </div>
-      </div>`
-  },
-  {
-    icon: "📜",
-    title: "8. Amy Johnson Schulregeln (2026)",
-    tag: "Kapitel 8",
-    desc: "Verhaltenskodex zur Gerätenutzung am Amy Johnson Gymnasium.",
-    content: `
-      <div class="content-block">
-        <h2>Verbindliche Nutzungsvereinbarung</h2>
-        <p>Mit dem Abschluss dieses Führerscheins verpflichtest du dich, folgende Schulregeln einzuhalten:</p>
-
-        <div class="rules-grid">
-          <div class="rule-box permit">
-            <h3>Regel 1: Gerät einsatzbereit halten</h3>
-            <p>Der Akku deines Laptops muss zu Beginn des Schultags mindestens 80% geladen sein. Steckdosen im Klassenzimmer sind Notfällen vorbehalten.</p>
-          </div>
-          <div class="rule-box permit">
-            <h3>Regel 2: Bildschirm auf Anweisung senken</h3>
-            <p>Heißt es "Deckel halb zu", wird der Laptop-Bildschirm sofort auf 45 Grad geneigt, um den Blickkontakt zur Lehrkraft herzustellen.</p>
-          </div>
-          <div class="rule-box forbid">
-            <h3>Regel 3: Kein Missbrauch des Schul-WLANs</h3>
-            <p>Das Schulnetzwerk ist ausschließlich für Unterrichtszwecke reserviert. Das Umgehen von Sperren über externe VPNs ist untersagt.</p>
-          </div>
-          <div class="rule-box trick">
-            <h3>[Platzhalter für weitere Schulregeln]</h3>
-            <p>Hier werden weitere schulspezifische Regelungen des Amy Johnson Gymnasiums eingepflegt.</p>
-          </div>
-        </div>
-
-        <div class="ibox ok" style="margin-top:1.5rem;">
-          <span class="ibox-icon">🎓</span>
-          <div class="ibox-body">
-            <strong>Bereit für die Prüfung?</strong>
-            <p>Wenn du alle 8 Kapitel verstanden und den Dateimanager-Simulator ausprobiert hast, fordere den Zugangscode bei deiner Lehrkraft an und starte den Abschlusstest!</p>
-          </div>
-        </div>
-      </div>`
-  }
-];
-
-let current = 0;
-
-function renderNav() {
-  const nav = document.getElementById('chapter-nav');
-  if (!nav) return;
-  nav.innerHTML = '';
-  const done = countDone(MOD, CHAPTERS.length);
-  document.getElementById('prog-text').textContent = done + ' von ' + CHAPTERS.length + ' Kapiteln abgeschlossen';
-  document.getElementById('prog-bar').style.width = Math.round((done / CHAPTERS.length) * 100) + '%';
-  
-  CHAPTERS.forEach((ch, i) => {
-    const li = document.createElement('li');
-    const isDone = isChapterDone(MOD, i);
-    li.className = (i === current ? 'active ' : '') + (isDone ? 'done' : '');
-    li.innerHTML = '<span class="ch-dot">' + (isDone ? '✓' : (i + 1)) + '</span>' + ch.icon + ' ' + ch.title;
-    li.addEventListener('click', () => { 
-      current = i; 
-      renderChapter(); 
-      renderNav(); 
-    });
-    nav.appendChild(li);
+  // Stepper aktualisieren
+  document.querySelectorAll('.step-card').forEach((card, i) => {
+    card.classList.toggle('active', i === idx);
+    const isDone = localStorage.getItem(`done_${TRACK_KEY}_${i}`) === '1';
+    card.classList.toggle('is-done', isDone);
+    if (isDone) card.querySelector('.step-num-badge').textContent = '✓';
+    else card.querySelector('.step-num-badge').textContent = i + 1;
   });
-}
 
-function renderChapter() {
-  const ch = CHAPTERS[current];
-  const area = document.getElementById('content-area');
-  const isDone = isChapterDone(MOD, current);
-  
-  area.innerHTML = '<div class="ch-header fade-up">' +
-    '<span class="ch-tag">' + ch.tag + '</span>' +
-    '<h1>' + ch.icon + ' ' + ch.title + '</h1>' +
-    '<p>' + ch.desc + '</p>' +
-    '</div>' +
-    ch.content +
-    '<div class="ch-actions">' +
-    '<button class="btn btn-success" onclick="markDone()">' +
-    (isDone ? '✓ Kapitel abgeschlossen' : '✓ Als gelernt markieren') +
-    '</button>' +
-    (current < CHAPTERS.length - 1 ? '<button class="btn btn-outline" onclick="nextChapter()">Nächstes Kapitel &rarr;</button>' : '') +
-    (current === CHAPTERS.length - 1 ? '<a href="quiz.html" class="btn btn-accent">Zum Abschlussquiz &rarr;</a>' : '') +
-    '</div>';
+  view.innerHTML = `
+    <div class="lesson-top-meta">
+      <span class="lesson-tag">${lesson.number} · ${lesson.category}</span>
+      <span class="lesson-time">⏱ Lesezeit: ${lesson.readTime}</span>
+    </div>
+    <h1 class="lesson-title">${lesson.title}</h1>
+    <div class="lesson-summary">${lesson.summary}</div>
+    ${lesson.content}
+    <div class="lesson-actions">
+      <button class="btn btn-success" onclick="markLessonDone(${idx})">
+        ${localStorage.getItem(`done_${TRACK_KEY}_${idx}`) === '1' ? '✓ Lektion bereits erledigt' : '✓ Lektion als gelernt markieren'}
+      </button>
+      ${idx < track.lessons.length - 1 
+        ? `<button class="btn btn-primary" onclick="renderLesson(${idx + 1})">Nächste Lektion &rarr;</button>` 
+        : `<a href="quiz.html?track=pc" class="btn btn-accent btn-lg">Zur Abschlussprüfung Laptop &rarr;</a>`
+      }
+    </div>
+  `;
 
-  window.scrollTo(0, 0);
+  window.scrollTo(0, 200);
 
-  // Falls Kapitel 2 gewählt wurde: Simulator instanziieren!
-  if (current === 1 && document.getElementById('sim-app-root')) {
-    window.osSim = new OSExplorerSimulator('sim-app-root');
+  // Falls Lektion 2 (Simulator) geladen wurde
+  if (idx === 1 && document.getElementById('lesson-sim-container')) {
+    window.pureExplorer = new PureFileExplorerSimulator('lesson-sim-container');
   }
-
-  // Checklisten-Eventlistener initialisieren
-  initChecklists();
 }
 
-function markDone() {
-  saveChapterDone(MOD, current);
-  renderNav();
-  renderChapter();
-}
-
-function nextChapter() {
-  if (current < CHAPTERS.length - 1) { 
-    current++; 
-    renderChapter(); 
-    renderNav(); 
-  }
+function markLessonDone(idx) {
+  localStorage.setItem(`done_${TRACK_KEY}_${idx}`, '1');
+  renderLesson(idx);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  renderNav();
-  renderChapter();
+  document.querySelectorAll('.step-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const step = parseInt(card.getAttribute('data-step'));
+      renderLesson(step);
+    });
+  });
+  renderLesson(0);
 });
 </script>
 </body>
