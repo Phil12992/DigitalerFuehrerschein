@@ -3,21 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zertifikat – Digitaler Führerschein</title>
+  <title>Zertifikat – Digitaler Führerschein (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar no-print">
   <a href="index.html" class="navbar-brand">
-    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-logo-wrap">
+      <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    </div>
     <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
     <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC</a></li>
-    <li><a href="tablet.html">📱 Tablet</a></li>
-    <li><a href="quiz.html">📝 Quiz</a></li>
+    <li><a href="pc.html">💻 PC-Simulator</a></li>
+    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
+    <li><a href="quiz.html">📝 Prüfung</a></li>
     <li><a href="certificate.html" class="active">🏅 Zertifikat</a></li>
   </ul>
 </nav>
@@ -47,7 +49,7 @@
     </div>
     <div class="form-row">
       <label for="inp-serial">Geräte-Modell / Kennung (optional)</label>
-      <input type="text" id="inp-serial" placeholder="z.B. Surface Laptop 5 oder iPad Air 5. Gen">
+      <input type="text" id="inp-serial" placeholder="z.B. Surface Laptop oder iPad Air">
     </div>
 
     <button class="btn btn-accent btn-lg" style="width:100%;margin-top:1.2rem;justify-content:center" onclick="generateCert()">
@@ -60,14 +62,16 @@
 <div class="cert-print-area" id="cert-output" style="display:none">
   <div class="certificate">
     <div class="cert-header">
-      <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="cert-logo">
+      <div class="cert-logo-box">
+        <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="cert-logo">
+      </div>
       <div class="cert-seal">
         <span style="font-size:1.6rem">🎓</span>
         <span>AMY JOHNSON<br>GYMNASIUM</span>
       </div>
     </div>
     <div class="cert-body">
-      <p class="cert-pre">Amy Johnson Gymnasium · Schuljahr 2025/2026</p>
+      <p class="cert-pre">Amy Johnson Gymnasium · Schuljahr 2026</p>
       <h1 class="cert-main">Digitaler <span>Führerschein</span></h1>
       <p class="cert-sub">Hiermit wird bescheinigt, dass</p>
       <div class="cert-name" id="cert-name-out">Vorname Nachname</div>
@@ -104,7 +108,7 @@
 </div>
 
 <footer class="footer no-print">
-  <p>© 2025 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
 </footer>
 
 <script src="js/app.js"></script>
@@ -121,7 +125,7 @@ function generateCert(){
   }
 
   document.getElementById("cert-name-out").textContent   = name;
-  document.getElementById("cert-klasse-out").textContent = klasse ? "Klasse / Jahrgangsstufe: " + klasse : "Oberstufe";
+  document.getElementById("cert-klasse-out").textContent = klasse ? "Klasse / Jahrgangsstufe: " + klasse : "Gymnasiale Oberstufe";
   document.getElementById("cert-device-out").textContent = "Zugelassenes Gerät: " + device;
   document.getElementById("cert-serial-out").textContent = serial ? "Gerätekennung: " + serial : "";
 

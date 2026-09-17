@@ -3,35 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Digitaler Führerschein – Amy Johnson Gymnasium</title>
+  <title>Digitaler Führerschein – Amy Johnson Gymnasium (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
   <a href="index.html" class="navbar-brand">
-    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-logo-wrap">
+      <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    </div>
     <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
     <li><a href="index.html" class="active">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC</a></li>
-    <li><a href="tablet.html">📱 Tablet</a></li>
-    <li><a href="quiz.html">📝 Quiz</a></li>
+    <li><a href="pc.html">💻 PC-Simulator</a></li>
+    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
+    <li><a href="quiz.html">📝 Prüfung</a></li>
     <li><a href="certificate.html">🏅 Zertifikat</a></li>
   </ul>
 </nav>
 
 <section class="hero">
-  <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="hero-logo">
+  <div class="hero-logo-box">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium Logo" class="hero-logo">
+  </div>
   <h1>Digitaler <span class="accent">Führerschein</span></h1>
-  <p>Lerne, dein digitales Gerät (PC oder Tablet) verantwortungsvoll, sicher und produktiv in der Oberstufe einzusetzen – und schalte deine Nutzungsgenehmigung frei!</p>
+  <p>Lerne, dein digitales Gerät (Laptop oder Tablet) verantwortungsvoll und rechtssicher in der Oberstufe einzusetzen. Mit echtem Dateimanager- &amp; Notizen-Simulator!</p>
   <div class="badge-row">
     <span class="badge">📚 Oberstufe (Sek II)</span>
-    <span class="badge">💻 Windows 11</span>
-    <span class="badge">📱 iPad & Samsung</span>
+    <span class="badge">💻 Windows 11 Explorer &amp; CLI</span>
+    <span class="badge">📱 GoodNotes &amp; Samsung Notes</span>
     <span class="badge">🔐 Zugangscode-Test</span>
-    <span class="badge">🏆 Offizielles Zertifikat</span>
+    <span class="badge">🏆 Gültig Schuljahr 2026</span>
   </div>
 </section>
 
@@ -39,89 +43,95 @@
   <div class="device-grid">
     <a href="pc.html" class="device-card fade-up">
       <div class="device-icon">💻</div>
-      <h2>PC / Laptop</h2>
-      <p>Windows 11 einrichten, Schulordner strukturieren, Office 365, Teams und fokussiertes Arbeiten.</p>
+      <h2>PC / Laptop (Windows 11)</h2>
+      <p>Inklusive <strong>interaktivem Datei-Explorer &amp; Live-PowerShell</strong>! Ordnerstruktur anlegen, Dateien regelkonform umbenennen und Cloud-Sync üben.</p>
       <div class="tag-list">
-        <span class="tag">Windows 11</span>
-        <span class="tag">Ordnerstruktur</span>
-        <span class="tag">Office 365 & Teams</span>
-        <span class="tag">Fokus-Modus</span>
-        <span class="tag">Datenschutz & KI</span>
+        <span class="tag">Interaktive Quests</span>
+        <span class="tag">Windows 11 Explorer</span>
+        <span class="tag">Live-CLI / PowerShell</span>
+        <span class="tag">Reizreduktion &amp; Fokus</span>
       </div>
-      <span class="btn btn-primary">PC-Modul starten &rarr;</span>
+      <span class="btn btn-primary">PC-Modul &amp; Simulator &rarr;</span>
     </a>
     <a href="tablet.html" class="device-card fade-up" style="animation-delay:.15s">
       <div class="device-icon">📱</div>
-      <h2>Tablet (iPad & Samsung)</h2>
-      <p>Notizen-Apps (GoodNotes / Samsung Notes), PDF-Annotation, Fächerorganisation und Tafelbilder.</p>
+      <h2>Tablet (iPad &amp; Samsung)</h2>
+      <p>Mit <strong>interaktivem Notizen- &amp; Zeichensimulator</strong>! Fächer-Hefte anlegen, PDF-Arbeitsblätter digital annotieren und Tafelbild-Recht erlernen.</p>
       <div class="tag-list">
-        <span class="tag">iPad (GoodNotes 6)</span>
-        <span class="tag">Samsung Notes & S-Pen</span>
-        <span class="tag">PDF-Workflow</span>
-        <span class="tag">Kamera & Tafelrecht</span>
-        <span class="tag">Ablenkung & Fokus</span>
+        <span class="tag">GoodNotes 6 (iPad)</span>
+        <span class="tag">Samsung Notes (Android)</span>
+        <span class="tag">Interaktiver Pen-Canvas</span>
+        <span class="tag">Tafelrecht &amp; Verhaltenskodex</span>
       </div>
-      <span class="btn btn-primary">Tablet-Modul starten &rarr;</span>
+      <span class="btn btn-primary">Tablet-Modul &amp; Simulator &rarr;</span>
     </a>
   </div>
 </section>
 
-<section class="how-section">
-  <h2 class="section-title">So erreichst du deinen digitalen Führerschein</h2>
-  <p class="section-sub">In 4 Schritten zum Nachweis für den Unterricht</p>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <h3>Gerät wählen</h3>
-      <p>Wähle Laptop oder Tablet je nachdem, was du im Unterricht nutzt.</p>
+<!-- HIGHLIGHT: INTERAKTIVE SIMULATION VORSCHAU -->
+<section style="max-width:960px;margin:0 auto 3.5rem;padding:0 1.5rem;">
+  <div style="background:#fff;border-radius:18px;border:1px solid var(--border);padding:2rem;box-shadow:var(--shadow);">
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+      <div>
+        <h2 style="color:var(--primary);font-size:1.4rem;font-weight:800;margin-bottom:0.25rem;">✨ Interaktive Praxis-Umgebung</h2>
+        <p style="color:var(--text-sec);font-size:0.92rem;">Direkt ausprobieren statt nur Theorie lesen: Wie bei interaktiven Coding-Apps wird jede Aufgabe live im Browser geprüft!</p>
+      </div>
+      <a href="pc.html" class="btn btn-accent">Direkt zum Datei-Simulator &rarr;</a>
     </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <h3>8 Module durcharbeiten</h3>
-      <p>Praxisnahe Tipps, Checklisten und Software-Empfehlungen abhaken.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <h3>Quiz mit Code starten</h3>
-      <p>Code von der Lehrkraft eingeben und min. 70% der Fragen richtig beantworten.</p>
-    </div>
-    <div class="step">
-      <div class="step-num">4</div>
-      <h3>Zertifikat ausdrucken</h3>
-      <p>PDF generieren, unterschreiben lassen und Gerät im Unterricht nutzen!</p>
+    
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;">
+      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🗂️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Simulierter Datei-Explorer</h3>
+        <p style="font-size:0.83rem;color:var(--text-sec);">Erstelle echte Ordner wie <code>Schule/2026/Mathematik</code>, benenne Dateien um und sortiere Hausarbeiten.</p>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">💻</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Eingebaute Live-CLI</h3>
+        <p style="font-size:0.83rem;color:var(--text-sec);">Tippe echte Befehle wie <code>mkdir</code>, <code>mv</code> oder <code>ls</code> in das integrierte Terminal.</p>
+      </div>
+      <div style="background:var(--bg);border-radius:12px;padding:1.2rem;border:1px solid var(--border-light);">
+        <div style="font-size:1.8rem;margin-bottom:0.4rem;">🖊️</div>
+        <h3 style="font-size:0.95rem;font-weight:700;color:var(--primary);margin-bottom:0.3rem;">Tablet-Canvas Mitschriften</h3>
+        <p style="font-size:0.83rem;color:var(--text-sec);">Übe Stiftwerkzeuge, Textmarker und PDF-Annotation wie in GoodNotes oder Samsung Notes.</p>
+      </div>
     </div>
   </div>
 </section>
 
-<section style="background:var(--bg);padding:3.5rem 2rem;text-align:center">
-  <h2 class="section-title">Schwerpunktthemen</h2>
-  <p class="section-sub">Kompetenzen für eine erfolgreiche und sichere Oberstufe</p>
-  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;max-width:960px;margin:0 auto">
-    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
-      <div style="font-size:2rem;margin-bottom:.5rem">📂</div>
-      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Dateimanagement</strong>
-      <span style="font-size:.85rem;color:var(--text-sec)">Nie wieder verlorene Hausaufgaben: Struktur nach Schuljahr, Fach und Thema plus Cloud-Sync.</span>
-    </div>
-    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
-      <div style="font-size:2rem;margin-bottom:.5rem">✍️</div>
-      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Digitales Mitschreiben</strong>
-      <span style="font-size:.85rem;color:var(--text-sec)">GoodNotes, Samsung Notes & OneNote: Stiftnutzung, Durchsuchbarkeit und PDF-Skripte.</span>
-    </div>
-    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
-      <div style="font-size:2rem;margin-bottom:.5rem">🤖</div>
-      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">KI & Quellenkompetenz</strong>
-      <span style="font-size:.85rem;color:var(--text-sec)">ChatGPT und Co. als Lernassistenz statt Plagiat – Faktenprüfung und Quellentransparenz.</span>
-    </div>
-    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
-      <div style="font-size:2rem;margin-bottom:.5rem">⚖️</div>
-      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Recht am Bild & Netiquette</strong>
-      <span style="font-size:.85rem;color:var(--text-sec)">Datenschutz, Tafelbilder, keine ungefragten Aufnahmen und respektvolle Mail-Kommunikation.</span>
+<!-- REGELN & VERLOCKUNG VORSCHAU -->
+<section style="background:#fff;padding:3.5rem 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div style="max-width:960px;margin:0 auto;text-align:center;">
+    <h2 class="section-title">Klare Regeln &amp; Reizunterdrückung</h2>
+    <p class="section-sub">Private Apps sind auf deinem Gerät erlaubt – im Unterricht herrschen jedoch klare Spielregeln.</p>
+    
+    <div class="rules-grid" style="text-align:left;">
+      <div class="rule-box permit">
+        <h3>✅ Das ist gestattet</h3>
+        <p>Du darfst private Apps (Spotify, Steam, Discord, Instagram) auf deinem privaten Gerät installiert haben.</p>
+        <p style="font-size:0.82rem;color:var(--text-light);">Das Gerät gehört dir – eine vollständige Entprivatisierung verlangt die Schule nicht.</p>
+      </div>
+      <div class="rule-box forbid">
+        <h3>🚫 Das gilt während der Schulzeit</h3>
+        <p>Sobald der Unterricht beginnt, sind alle privaten Apps, Spiele und Benachrichtigungen absolut tabu.</p>
+        <p style="font-size:0.82rem;color:var(--text-light);">Nutzung privater Medien führt zum sofortigen Entzug der Unterrichtserlaubnis.</p>
+      </div>
+      <div class="rule-box trick">
+        <h3>💡 Reize aktiv ausschalten (Fokus-Hack)</h3>
+        <p>Schalte während der Unterrichtszeit den <strong>Fokus-Modus</strong> (Schulzeit-Profil) ein und nutze den <strong>Graustufen-Filter</strong>.</p>
+        <p style="font-size:0.82rem;color:var(--text-light);">Graue Bildschirme senken den Dopaminreiz drastisch und halten dich konzentriert.</p>
+      </div>
+      <div class="rule-box trick">
+        <h3>📌 Platzhalter für Schulregeln</h3>
+        <p>Hier werden die spezifischen Schulregeln des Amy Johnson Gymnasiums (z. B. WLAN-Zugang, Pausenregelung) abgebildet.</p>
+        <p style="font-size:0.82rem;color:var(--text-light);">(Werden nach Bedarf flexibel erweitert und aktualisiert).</p>
+      </div>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  <p>© 2025 <strong style="color:rgba(255,255,255,.9)">Amy Johnson Gymnasium</strong> · Digitaler Führerschein (Oberstufe)</p>
+  <p>© 2026 <strong style="color:rgba(255,255,255,.95)">Amy Johnson Gymnasium</strong> · Digitaler Führerschein (Gymnasiale Oberstufe)</p>
 </footer>
 
 <script src="js/app.js"></script>

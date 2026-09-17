@@ -3,64 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Abschlussquiz – Digitaler Führerschein</title>
+  <title>Abschlussprüfung – Digitaler Führerschein (2026)</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 <nav class="navbar">
   <a href="index.html" class="navbar-brand">
-    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-logo-wrap">
+      <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    </div>
     <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
   </a>
   <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
   <ul class="navbar-nav">
     <li><a href="index.html">🏠 Start</a></li>
-    <li><a href="pc.html">💻 PC</a></li>
-    <li><a href="tablet.html">📱 Tablet</a></li>
-    <li><a href="quiz.html" class="active">📝 Quiz</a></li>
+    <li><a href="pc.html">💻 PC-Simulator</a></li>
+    <li><a href="tablet.html">📱 Tablet-Simulator</a></li>
+    <li><a href="quiz.html" class="active">📝 Prüfung</a></li>
     <li><a href="certificate.html">🏅 Zertifikat</a></li>
   </ul>
 </nav>
 
 <main class="quiz-wrap">
-  <!-- SCREEN: ZUGANGSCODE -->
+  <!-- SCREEN 1: ZUGANGSCODE -->
   <div id="screen-code" class="quiz-card fade-up">
     <div class="code-icon">🔐</div>
-    <h1>Abschlussprüfung</h1>
-    <p>Der Abschlusstest schaltet dein Zertifikat frei. Bitte gib den Zugangscode deiner Lehrkraft ein:</p>
+    <h1>Abschlussprüfung Oberstufe</h1>
+    <p>Der Test schaltet deine offizielle Gerätenutzungserlaubnis für die Oberstufe frei. Bitte gib den Zugangscode deiner Lehrkraft ein:</p>
     
     <div class="code-row">
-      <input type="text" id="code-input" placeholder="CODE EINGEBEN" maxlength="15" autocomplete="off">
-      <button class="btn btn-primary" onclick="checkCode()">Test starten</button>
+      <input type="text" id="code-input" placeholder="ZUGANGSCODE" maxlength="15" autocomplete="off">
+      <button class="btn btn-primary" onclick="checkCode()">Prüfung starten</button>
     </div>
-    <p class="code-err" id="code-err">Ungültiger Zugangscode! Bitte wende dich an deine Lehrkraft.</p>
+    <p class="code-err" id="code-err">Ungültiger Zugangscode! Frage deine Lehrkraft.</p>
     
     <div class="ibox info" style="margin-top:2rem;text-align:left">
       <span class="ibox-icon">ℹ️</span>
       <div class="ibox-body">
-        <strong>Testbedingungen</strong>
-        <p>• 20 zufällig sortierte Fragen zu PC, Tablet, Datenschutz, KI und Schulregeln.<br>
+        <strong>Prüfungsmodalitäten (Amy Johnson Gymnasium 2026)</strong>
+        <p>• 20 zufällig gemischte Fragen zu PC, Tablet, Datenschutz, KI und Schulregeln.<br>
            • Mindestpunktzahl: <strong>70%</strong> zum Bestehen.<br>
-           • Nach erfolgreichem Abschluss kannst du dein Zertifikat sofort drucken.</p>
+           • Nach erfolgreichem Test wird das druckbare Führerschein-Zertifikat freigeschaltet.</p>
       </div>
     </div>
+
     <div class="ibox tip" style="margin-top:0.75rem;text-align:left">
       <span class="ibox-icon">💡</span>
       <div class="ibox-body">
-        <strong>Tipp für Lehrkräfte / Testbetrieb:</strong>
-        <p>Der voreingestellte Code lautet <code>AJG2025</code> (kann in <code>js/quiz-data.js</code> angepasst werden).</p>
+        <strong>Hinweis für Lehrkräfte &amp; Testbetrieb:</strong>
+        <p>Der voreingestellte Code lautet <code>AJG2025</code> (konfigurierbar in <code>js/quiz-data.js</code>).</p>
       </div>
     </div>
   </div>
 
-  <!-- SCREEN: QUIZ LAUFEND -->
+  <!-- SCREEN 2: QUIZ LAUFEND -->
   <div id="screen-quiz" class="quiz-card fade-up hidden">
     <div class="quiz-prog-row">
       <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="q-prog" style="width:0%"></div></div>
       <span class="quiz-count" id="q-count">1 / 20</span>
     </div>
     <span class="q-cat" id="q-cat">Kategorie</span>
-    <h2 class="q-text" id="q-text" style="font-size:1.15rem;margin-bottom:1.2rem;"></h2>
+    <h2 class="q-text" id="q-text"></h2>
     <ul class="options" id="q-options"></ul>
     <div class="q-feedback" id="q-feedback"></div>
     <div class="q-nav">
@@ -68,7 +71,7 @@
     </div>
   </div>
 
-  <!-- SCREEN: ERGEBNIS -->
+  <!-- SCREEN 3: ERGEBNIS -->
   <div id="screen-result" class="quiz-card fade-up hidden">
     <div class="result-icon" id="res-icon"></div>
     <div class="result-score" id="res-score"></div>
@@ -78,7 +81,7 @@
 </main>
 
 <footer class="footer">
-  <p>© 2025 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+  <p>© 2026 Amy Johnson Gymnasium · Digitaler Führerschein</p>
 </footer>
 
 <script src="js/quiz-data.js"></script>
@@ -144,7 +147,7 @@ function loadQuestion(){
   });
 
   if(current === questions.length - 1){
-    document.getElementById("btn-next").textContent = "Auswertung ansehen 📊";
+    document.getElementById("btn-next").textContent = "Prüfungsergebnis anzeigen 📊";
   } else {
     document.getElementById("btn-next").textContent = "Nächste Frage &rarr;";
   }
@@ -203,7 +206,7 @@ function showResult(){
   
   if(passed){
     msg.innerHTML = `<h2>Herzlichen Glückwunsch! Bestanden 🎉</h2>
-      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig beantwortet. Damit hast du alle Voraussetzungen für die Gerätenutzung in der Schule erfüllt.</p>`;
+      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig beantwortet. Damit hast du alle Voraussetzungen für die Gerätenutzung in der Oberstufe erfüllt.</p>`;
   } else {
     msg.innerHTML = `<h2>Leider nicht bestanden</h2>
       <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig. Zum Bestehen benötigst du mindestens <strong>${MIN_PASS_PERCENT}%</strong>. Wiederhole die Module und versuche es erneut!</p>`;
