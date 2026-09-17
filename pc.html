@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PC-Modul - Digitaler Fuehrerschein</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-title">Digitaler Fuehrerschein <span>Amy Johnson Gymnasium</span></div>
+  </a>
+  <button class="hamburger" onclick="this.nextElementSibling.nextElementSibling.classList.toggle('open')">&#9776;</button>
+  <ul class="navbar-nav">
+    <li><a href="index.html">&#127968; Start</a></li>
+    <li><a href="pc.html" class="active">&#128187; PC</a></li>
+    <li><a href="tablet.html">&#128241; Tablet</a></li>
+    <li><a href="quiz.html">&#128221; Quiz</a></li>
+  </ul>
+</nav>
+
+<div class="module-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <h2>&#128187; PC / Laptop-Modul</h2>
+      <p id="prog-text">0 von 8 Kapiteln abgeschlossen</p>
+      <div class="sidebar-prog"><div class="sidebar-prog-bar" id="prog-bar" style="width:0%"></div></div>
+    </div>
+    <ul class="chapter-nav" id="chapter-nav"></ul>
+  </aside>
+  <main class="content-area" id="content-area">
+    <p style="color:var(--text-sec)">Kapitel wird geladen...</p>
+  </main>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2025 Amy Johnson Gymnasium &middot; Digitaler Fuehrerschein</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+const MOD = "pc";
+const CHAPTERS = [
+  {
+    icon: "&#128274;",
+    title: "Anmeldung & Einrichtung",
+    tag: "Kapitel 1",
+    desc: "Dein Windows 11 Geraet sicher einrichten und das Schulkonto konfigurieren.",
+    content: `
+      <div class="content-block">
+        <h2>Windows-Anmeldung sicher einrichten</h2>
+        <p>Windows 11 bietet verschiedene Anmeldemethoden. Fuer die Schule empfehlen wir Windows Hello (PIN oder Fingerabdruck) - es ist schnell und sicher.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Empfehlung</strong><p>Nutze eine 6-stellige PIN statt eines Passworts fuer den schnellen Schulalltag. Das Passwort fuer dein Microsoft-Konto bleibt dennoch stark und geheim.</p></div></div>
+        <h2>Schulkonto einrichten</h2>
+        <p>Falls deine Schule Microsoft 365 nutzt, verbinde dein Schulkonto unter Einstellungen > Konten > Auf Schule oder Arbeit zugreifen. Damit hast du Zugriff auf Teams, SharePoint und Office.</p>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>Schulkonto vs. persoenliches Konto</strong><p>Nutze fuer die Schule ausschliesslich dein Schulkonto. Persoenliche Microsoft-Konten sollen vom Schulkonto getrennt bleiben.</p></div></div>
+        <h2>Erste Einrichtung - Checkliste</h2>
+        <ul class="checklist" id="cl-1">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Windows auf dem neuesten Stand (Updates installieren)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Schulkonto verknuepft (Microsoft 365)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Windows Hello eingerichtet (PIN / Fingerabdruck)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>OneDrive mit Schulkonto verbunden</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Antivirusprogramm aktiv (Windows Defender)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Bildschirmsperre nach 5 Minuten aktiviert</li>
+        </ul>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Wichtig</strong><p>Verlasse deinen Sitzplatz niemals ohne das Geraet zu sperren! Druecke Win+L um sofort zu sperren.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#128451;",
+    title: "Ordnerstruktur & Dateien",
+    tag: "Kapitel 2",
+    desc: "Dateien sinnvoll benennen und eine uebersichtliche Ordnerstruktur aufbauen.",
+    content: `
+      <div class="content-block">
+        <h2>Warum Ordnung so wichtig ist</h2>
+        <p>Wer keine Struktur hat, verliert Zeit beim Suchen. Mit einer cleveren Ordnerstruktur findest du jede Datei in Sekunden - auch Monate spaeter.</p>
+        <h2>Empfohlene Ordnerstruktur</h2>
+        <div class="ibox info"><span class="ibox-icon">&#128451;</span><div class="ibox-body"><strong>Struktur-Vorlage</strong><ul><li>&#128193; Schule</li><li>&nbsp;&nbsp;&#128193; 2025-26</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&#128193; Deutsch</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&#128193; Mathematik</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&#128193; Biologie</li><li>&nbsp;&nbsp;&nbsp;&nbsp;&#128193; ...</li></ul></div></div>
+        <h2>Dateien richtig benennen</h2>
+        <p>Ein guter Dateiname hat immer Datum, Fach und Thema:</p>
+        <div class="ibox ok"><span class="ibox-icon">&#10003;</span><div class="ibox-body"><strong>Gut:</strong><p>2025-09-17_Deutsch_Eroeﬀnung-Faust.docx</p></div></div>
+        <div class="ibox warn"><span class="ibox-icon">&#10007;</span><div class="ibox-body"><strong>Schlecht:</strong><p>neues dokument.docx &nbsp;|&nbsp; asdf.docx &nbsp;|&nbsp; hausaufgabe FINAL2.docx</p></div></div>
+        <h2>Checkliste Dateimanagement</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Ordnerstruktur Schule > Jahr > Fach angelegt</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Desktop ist aufgeraeumt (max. 10 Elemente)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Downloads-Ordner regelmaessig leeren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Dateien immer sinnvoll benennen (Datum_Fach_Thema)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>OneDrive synchronisiert automatisch alle Schuldokumente</li>
+        </ul>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Profi-Tipp</strong><p>Nutze OneDrive als primaeren Speicherort. So hast du deine Dateien auch bei Geraetewechsel oder Verlust immer dabei.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#128187;",
+    title: "Programme & Tools",
+    tag: "Kapitel 3",
+    desc: "Die wichtigsten Programme fuer den Schulalltag kennen und nutzen.",
+    content: `
+      <div class="content-block">
+        <h2>Microsoft Office 365 - deine Basis</h2>
+        <p>Als Oberstufenschueler brauchst du vor allem Word, PowerPoint, Excel und OneNote. Diese sind ueber das Schulkonto kostenlos verfuegbar.</p>
+        <div class="app-grid">
+          <div class="app-card"><span class="app-icon">&#128196;</span><div class="app-info"><strong>Microsoft Word</strong><span>Hausarbeiten, Aufsaetze, Berichte</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128202;</span><div class="app-info"><strong>PowerPoint</strong><span>Praesentationen erstellen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128203;</span><div class="app-info"><strong>OneNote</strong><span>Digitale Mitschriften, Notizen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128200;</span><div class="app-info"><strong>Excel</strong><span>Tabellen, Datenauswertung</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128172;</span><div class="app-info"><strong>Microsoft Teams</strong><span>Kommunikation, Aufgaben, Meetings</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#127758;</span><div class="app-info"><strong>Microsoft Edge</strong><span>Browser mit Reader-Modus</span><span class="app-free">Vorinstalliert</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128214;</span><div class="app-info"><strong>Zotero</strong><span>Quellenmanagement fuer Hausarbeiten</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#127909;</span><div class="app-info"><strong>VLC Media Player</strong><span>Videos und Audio abspielen</span><span class="app-free">Kostenlos</span></div></div>
+        </div>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Vorsicht bei Downloads</strong><p>Lade Programme nur von offiziellen Webseiten herunter. Kein Raubkopieren! Viele gute Tools sind kostenlos.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#127919;",
+    title: "Konzentriert Arbeiten",
+    tag: "Kapitel 4",
+    desc: "Ablenkungen minimieren und produktiv lernen mit Windows-Bordmitteln.",
+    content: `
+      <div class="content-block">
+        <h2>Fokus-Modus in Windows 11</h2>
+        <p>Windows 11 hat einen eingebauten Fokus-Modus, der Benachrichtigungen stumm schaltet. Aktiviere ihn ueber Einstellungen > System > Fokus.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#127919;</span><div class="ibox-body"><strong>Fokus-Modus einrichten</strong><ul><li>Einstellungen > System > Fokus</li><li>Dauer einstellen (z.B. 25 Min Pomodoro)</li><li>Ungewuenschte Benachrichtigungen blockieren</li></ul></div></div>
+        <h2>Die Pomodoro-Technik</h2>
+        <p>25 Minuten konzentriert arbeiten, dann 5 Minuten Pause. Nach 4 Runden: 15-30 Minuten Pause. Diese Methode steigert nachweislich die Konzentration.</p>
+        <h2>Weitere Tipps fuer produktives Arbeiten</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Handy stumm schalten und verdeckt ablegen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Nur fuer die Aufgabe relevante Tabs und Apps oeffnen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Benachrichtigungen in Windows deaktivieren (Fokus-Modus)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Pomodoro-Timer nutzen (z.B. pomofocus.io)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Lernziel vor dem Arbeiten klar definieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Regelmaessige Pausen einhalten</li>
+        </ul>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>Virtuelle Desktops</strong><p>Nutze Win+Strg+D um mehrere virtuelle Desktops zu erstellen. So kannst du z.B. einen Desktop fuer Schule und einen fuer Privates trennen.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#128272;",
+    title: "Sicherheit & Datenschutz",
+    tag: "Kapitel 5",
+    desc: "Passwoerter, Phishing und sicheres Surfen - so schuetzt du dich online.",
+    content: `
+      <div class="content-block">
+        <h2>Starke Passwoerter</h2>
+        <p>Ein gutes Passwort hat mindestens 12 Zeichen und besteht aus Gross- und Kleinbuchstaben, Zahlen und Sonderzeichen. Nutze fuer jeden Dienst ein anderes Passwort.</p>
+        <div class="ibox ok"><span class="ibox-icon">&#10003;</span><div class="ibox-body"><strong>Gutes Passwort-Beispiel</strong><p>Tr0mmelS0lo!2025 &nbsp;&mdash;&nbsp; oder noch besser: ein Passwort-Manager wie Bitwarden (kostenlos)</p></div></div>
+        <div class="ibox warn"><span class="ibox-icon">&#10007;</span><div class="ibox-body"><strong>Schlechte Passwoerter</strong><p>Max2008 &nbsp;|&nbsp; 123456 &nbsp;|&nbsp; passwort &nbsp;|&nbsp; geburtstagsdatum</p></div></div>
+        <h2>Phishing erkennen</h2>
+        <p>Phishing-Mails tarnen sich als echte Mails von Banken, Schulen oder Services. Achte auf: Unbekannte Absendeadressen, Tippfehler, Dringlichkeit, seltsame Links.</p>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Goldene Regeln</strong><ul><li>Niemals Passwoerter per Mail eingeben</li><li>Links immer erst hovern bevor du klickst</li><li>Im Zweifel: nicht klicken und nachfragen</li></ul></div></div>
+        <h2>Sicherheits-Checkliste</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Einzigartiges Passwort fuer das Schulkonto</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Passwort nirgendwo aufschreiben oder weitergeben</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Windows Defender aktiv und aktuell</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>HTTPS in der Adresszeile immer pruefen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine Software aus unsicheren Quellen installieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Geraet niemals an Fremde weitergeben</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#9993;",
+    title: "Kommunikation & Netiquette",
+    tag: "Kapitel 6",
+    desc: "Professionelle E-Mails schreiben und die Regeln der digitalen Kommunikation.",
+    content: `
+      <div class="content-block">
+        <h2>Professionelle E-Mails schreiben</h2>
+        <p>E-Mails an Lehrkraefte sind keine WhatsApp-Nachrichten. Sie brauchen eine klare Struktur und hoefliche Sprache.</p>
+        <div class="ibox info"><span class="ibox-icon">&#9993;</span><div class="ibox-body"><strong>E-Mail-Aufbau</strong><ul><li><strong>Betreff:</strong> Kurz und praezise (Klasse, Thema)</li><li><strong>Anrede:</strong> Sehr geehrte Frau / Sehr geehrter Herr...</li><li><strong>Text:</strong> Klar und hoeflich formuliert</li><li><strong>Schluss:</strong> Mit freundlichen Gruessen</li><li><strong>Name:</strong> Vollstaendiger Name + Klasse</li></ul></div></div>
+        <h2>Netiquette - die 5 wichtigsten Regeln</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Respektvoll und hoeflich formulieren - auch online</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine Beleidigungen, Geruechte oder Schlechtreden</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Antwortzeiten respektieren (Lehrkraefte antworten nicht sofort)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine sensiblen Informationen in Gruppen-Chats teilen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Abkuerzungen und Emojis nur wo passend</li>
+        </ul>
+        <h2>Microsoft Teams in der Schule</h2>
+        <p>Teams ist die Hauptkommunikationsplattform. Benachrichtigungen einstellen, Aufgaben im Blick behalten und rechtzeitig auf Lehrkraft-Nachrichten reagieren.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Teams-Tipp</strong><p>Stelle Teams-Benachrichtigungen so ein, dass du wichtige Nachrichten erhaeltst, aber nicht staendig abgelenkt wirst.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#128295;",
+    title: "Geraetepflege",
+    tag: "Kapitel 7",
+    desc: "Deinen Laptop pflegen, Akku schonen und ihn sicher transportieren.",
+    content: `
+      <div class="content-block">
+        <h2>Akku optimal pflegen</h2>
+        <p>Lithium-Akkus halten am laengsten, wenn sie nicht staendig voll- oder leergeladen werden. Der ideale Bereich liegt zwischen 20% und 80%.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Akku-Tipp</strong><ul><li>Ladestand zwischen 20-80% halten</li><li>Extreme Hitze und Kaelte vermeiden</li><li>Windows 11: Akku-Schonungsmodus aktivieren (Einstellungen > System > Akku)</li><li>Bildschirmhelligkeit reduzieren spart Akku</li></ul></div></div>
+        <h2>Transport und physischer Schutz</h2>
+        <p>Dein Laptop ist teuer und empfindlich. Behandle ihn entsprechend!</p>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Laptoptasche oder Schutzhuelle nutzen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Kein Druck auf dem Deckel (keine Buecher drauf stapeln)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Fluessigkeiten immer vom Geraet fernhalten</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Geraet vor dem Einpacken ausreichend abkuehlen lassen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Windows Updates regelmaessig installieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Geraet regelmaessig mit einem trockenen Tuch reinigen</li>
+        </ul>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Schadensfall</strong><p>Bei Schaeden sofort die Schule informieren. Auf eigene Faust reparieren oder reparieren lassen ist oft teurer und riskanter.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#128218;",
+    title: "Schulregeln & Etikette",
+    tag: "Kapitel 8",
+    desc: "Wann und wie du das Geraet im Unterricht benutzen darfst - und was verboten ist.",
+    content: `
+      <div class="content-block">
+        <h2>Grundprinzip: Das Geraet ist ein Lernwerkzeug</h2>
+        <p>Dein Laptop darf im Unterricht genutzt werden - aber nur als Lernwerkzeug. Private Aktivitaeten, Spiele und Social Media sind waehrend des Unterrichts verboten.</p>
+        <div class="ibox ok"><span class="ibox-icon">&#10003;</span><div class="ibox-body"><strong>Erlaubt im Unterricht</strong><ul><li>Mitschreiben und Notizen machen</li><li>Recherche fuer den Unterricht</li><li>Aufgaben bearbeiten (wenn von Lehrkraft aufgegeben)</li><li>Praesentation zeigen</li><li>Schulplattform / Teams nutzen</li></ul></div></div>
+        <div class="ibox warn"><span class="ibox-icon">&#10007;</span><div class="ibox-body"><strong>Verboten im Unterricht</strong><ul><li>Social Media, YouTube, Gaming</li><li>Private Chats und WhatsApp</li><li>Nutzung ohne Erlaubnis der Lehrkraft</li><li>Fotos ohne Erlaubnis machen</li><li>Stoerende Benachrichtigungen</li></ul></div></div>
+        <h2>Datenschutz und Recht am Bild</h2>
+        <p>Das Fotografieren oder Filmen von Mitschuelerinnen und Mitschuelern ist ohne deren ausdrueckliche Einwilligung verboten. Das gilt auch fuer Lehrkraefte.</p>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>Cyber-Mobbing</strong><p>Beleidigen, Bedrohen oder Bloessestellen ueber digitale Kanaele ist Cyber-Mobbing - und strafbar. Bei Vorfaellen: Screenshot sichern, melden, Vertrauensperson ansprechen.</p></div></div>
+        <h2>KI verantwortungsvoll nutzen</h2>
+        <p>KI-Tools wie ChatGPT koennen beim Lernen helfen - aber nicht als Ersatz fuer eigenes Denken. KI-generierte Texte als eigene Arbeit abzugeben ist Taeuschungsversuch.</p>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Geraet nur mit Erlaubnis der Lehrkraft im Unterricht nutzen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine privaten Aktivitaeten waehrend des Unterrichts</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine Fotos ohne Erlaubnis</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>KI-Nutzung immer transparent machen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Bei Cyber-Mobbing sofort melden</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Schulregeln zur Geraetenutzung kennen und einhalten</li>
+        </ul>
+      </div>`
+  }
+];
+
+let current = 0;
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const box = li.querySelector('.cl-box');
+  if (box) box.textContent = li.classList.contains('checked') ? '&#10003;' : '';
+}
+
+function renderNav() {
+  const nav = document.getElementById('chapter-nav');
+  nav.innerHTML = '';
+  const done = countDone(MOD, CHAPTERS.length);
+  document.getElementById('prog-text').textContent = done + ' von ' + CHAPTERS.length + ' Kapiteln abgeschlossen';
+  document.getElementById('prog-bar').style.width = Math.round((done / CHAPTERS.length) * 100) + '%';
+  CHAPTERS.forEach((ch, i) => {
+    const li = document.createElement('li');
+    const isDone = isChapterDone(MOD, i);
+    li.className = (i === current ? 'active ' : '') + (isDone ? 'done' : '');
+    li.innerHTML = '<span class="ch-dot">' + (isDone ? '&#10003;' : (i + 1)) + '</span>' + ch.icon + ' ' + ch.title;
+    li.addEventListener('click', () => { current = i; renderChapter(); renderNav(); });
+    nav.appendChild(li);
+  });
+}
+
+function renderChapter() {
+  const ch = CHAPTERS[current];
+  const area = document.getElementById('content-area');
+  const isDone = isChapterDone(MOD, current);
+  area.innerHTML = '<div class="ch-header fade-up">' +
+    '<span class="ch-tag">' + ch.tag + '</span>' +
+    '<h1>' + ch.icon + ' ' + ch.title + '</h1>' +
+    '<p>' + ch.desc + '</p>' +
+    '</div>' +
+    ch.content +
+    '<div class="ch-actions">' +
+    '<button class="btn btn-success' + (isDone ? ' btn-done' : '') + '" onclick="markDone()" id="btn-done">' +
+    (isDone ? '&#10003; Abgeschlossen' : '&#10003; Kapitel abschliessen') +
+    '</button>' +
+    (current < CHAPTERS.length - 1 ? '<button class="btn btn-outline" onclick="nextChapter()">Naechstes Kapitel &rarr;</button>' : '') +
+    (current === CHAPTERS.length - 1 ? '<a href="quiz.html" class="btn btn-accent">Zum Abschlussquiz &rarr;</a>' : '') +
+    '</div>';
+  window.scrollTo(0, 0);
+}
+
+function markDone() {
+  saveChapterDone(MOD, current);
+  renderNav();
+  renderChapter();
+}
+
+function nextChapter() {
+  if (current < CHAPTERS.length - 1) { current++; renderChapter(); renderNav(); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav();
+  renderChapter();
+});
+</script>
+</body>
+</html>

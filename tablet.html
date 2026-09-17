@@ -1,0 +1,326 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tablet-Modul - Digitaler Fuehrerschein</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-title">Digitaler Fuehrerschein <span>Amy Johnson Gymnasium</span></div>
+  </a>
+  <button class="hamburger" onclick="this.nextElementSibling.nextElementSibling.classList.toggle('open')">&#9776;</button>
+  <ul class="navbar-nav">
+    <li><a href="index.html">&#127968; Start</a></li>
+    <li><a href="pc.html">&#128187; PC</a></li>
+    <li><a href="tablet.html" class="active">&#128241; Tablet</a></li>
+    <li><a href="quiz.html">&#128221; Quiz</a></li>
+  </ul>
+</nav>
+
+<div class="module-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-head">
+      <h2>&#128241; Tablet-Modul</h2>
+      <p id="prog-text">0 von 8 Kapiteln abgeschlossen</p>
+      <div class="sidebar-prog"><div class="sidebar-prog-bar" id="prog-bar" style="width:0%"></div></div>
+    </div>
+    <ul class="chapter-nav" id="chapter-nav"></ul>
+  </aside>
+  <main class="content-area" id="content-area">
+    <p style="color:var(--text-sec)">Kapitel wird geladen...</p>
+  </main>
+</div>
+
+<footer class="footer">
+  <p>&copy; 2025 Amy Johnson Gymnasium &middot; Digitaler Fuehrerschein</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+const MOD = "tablet";
+
+// iPad vs Samsung toggle HTML (inserted into chapters where relevant)
+const toggleHTML = `<div class="device-toggle" style="margin-bottom:1.25rem">
+  <button id="tog-ipad" class="active" onclick="showTab('ipad')">&#160;iPad (Apple)</button>
+  <button id="tog-samsung" onclick="showTab('samsung')">Samsung</button>
+</div>`;
+
+function showTab(t) {
+  document.querySelectorAll('.ipad-only').forEach(el => el.style.display = t === 'ipad' ? '' : 'none');
+  document.querySelectorAll('.samsung-only').forEach(el => el.style.display = t === 'samsung' ? '' : 'none');
+  document.getElementById('tog-ipad').classList.toggle('active', t === 'ipad');
+  document.getElementById('tog-samsung').classList.toggle('active', t === 'samsung');
+}
+
+const CHAPTERS = [
+  {
+    icon: "&#9881;",
+    title: "Tablet einrichten",
+    tag: "Kapitel 1",
+    desc: "Konto einrichten, Cloud verbinden und erste Sicherheitseinstellungen.",
+    content: `
+      <div class="content-block">
+        ${toggleHTML}
+        <div class="ipad-only">
+          <h2>iPad einrichten (Apple)</h2>
+          <p>Du brauchst eine Apple ID - am besten eine separate fuer die Schule oder die Schulkonto-Integration. Verbinde iCloud Drive als Cloudspeicher.</p>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>iPad-Tipp</strong><ul><li>Face ID oder starken PIN einrichten</li><li>iCloud Drive aktivieren fuer automatische Sicherung</li><li>Automatische Updates aktivieren</li><li>Bildschirmsperre nach 2 Minuten</li></ul></div></div>
+        </div>
+        <div class="samsung-only" style="display:none">
+          <h2>Samsung Tablet einrichten</h2>
+          <p>Du brauchst ein Samsung Konto und Google-Konto. Verbinde Google Drive oder OneDrive als Schulcloud.</p>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Samsung-Tipp</strong><ul><li>Fingerabdruck oder starken PIN einrichten</li><li>Google Drive oder OneDrive aktivieren</li><li>Automatische Updates aktivieren</li><li>Bildschirmsperre nach 2 Minuten</li></ul></div></div>
+        </div>
+        <h2>Checkliste Ersteinrichtung</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Starker PIN oder Biometrie eingerichtet</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Cloud-Speicher verbunden und aktiv</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Tablet vollstaendig auf aktuelle Version aktualisiert</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Bildschirmsperre nach 2-5 Minuten aktiviert</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Ortungsschutz aktiviert (Mein iPad/Mein Geraet finden)</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#9999;",
+    title: "Notiz-Apps meistern",
+    tag: "Kapitel 2",
+    desc: "GoodNotes (iPad) oder Samsung Notes optimal fuer die Schule einrichten.",
+    content: `
+      <div class="content-block">
+        ${toggleHTML}
+        <div class="ipad-only">
+          <h2>GoodNotes 6 fuer iPad</h2>
+          <p>GoodNotes ist die beliebteste Notiz-App fuer iPad-Schueler. Mit Apple Pencil kannst du handschriftliche Notizen machen, die sogar durchsuchbar sind.</p>
+          <div class="app-grid">
+            <div class="app-card"><span class="app-icon">&#128214;</span><div class="app-info"><strong>GoodNotes 6</strong><span>Handschrift, PDFs annotieren, Vorlagen</span><span class="app-paid">Kostenpflichtig (~10EUR)</span></div></div>
+            <div class="app-card"><span class="app-icon">&#128203;</span><div class="app-info"><strong>Microsoft OneNote</strong><span>Kostenlose Alternative, Sync mit Office</span><span class="app-free">Kostenlos</span></div></div>
+            <div class="app-card"><span class="app-icon">&#128221;</span><div class="app-info"><strong>Notizen (Apple)</strong><span>Einfache Notizen, iCloud-Sync</span><span class="app-free">Vorinstalliert</span></div></div>
+          </div>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>GoodNotes optimal nutzen</strong><ul><li>Pro Schulfach ein eigenes Notizbuch anlegen</li><li>Registerseiten fuer Themen nutzen</li><li>Stifteinstellungen individuell anpassen</li><li>Handschrift-zu-Text-Funktion verwenden</li><li>PDFs importieren und direkt annotieren</li></ul></div></div>
+        </div>
+        <div class="samsung-only" style="display:none">
+          <h2>Samsung Notes fuer Samsung Tablet</h2>
+          <p>Samsung Notes ist die vorinstallierte Notiz-App und unterstuetzt den S Pen sehr gut. Fuer erweiterte Funktionen ist Microsoft OneNote empfehlenswert.</p>
+          <div class="app-grid">
+            <div class="app-card"><span class="app-icon">&#128221;</span><div class="app-info"><strong>Samsung Notes</strong><span>Handschrift, Zeichnungen, Sprachaufnahmen</span><span class="app-free">Vorinstalliert</span></div></div>
+            <div class="app-card"><span class="app-icon">&#128203;</span><div class="app-info"><strong>Microsoft OneNote</strong><span>Kostenlos, Office-Integration</span><span class="app-free">Kostenlos</span></div></div>
+            <div class="app-card"><span class="app-icon">&#128214;</span><div class="app-info"><strong>Squid Notes</strong><span>Handschrift auf PDFs, sehr gut</span><span class="app-free">Basis kostenlos</span></div></div>
+          </div>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Samsung Notes optimal nutzen</strong><ul><li>Pro Schulfach einen eigenen Ordner anlegen</li><li>S Pen-Einstellungen anpassen</li><li>Notizen als PDF exportieren und teilen</li><li>Synchronisation mit Samsung Cloud aktivieren</li></ul></div></div>
+        </div>
+        <h2>Allgemeine Tipps fuer Notizen</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Pro Schulfach ein eigenes Notizbuch / Ordner</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Notizen mit Datum und Thema benennen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Cloud-Sync aktiviert fuer automatische Sicherung</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Regelmaessig exportieren (PDF) als Backup</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#128193;",
+    title: "Faecherorganisation",
+    tag: "Kapitel 3",
+    desc: "PDFs importieren, annotieren und Lernmaterialien strukturiert ablegen.",
+    content: `
+      <div class="content-block">
+        <h2>Schulbuecher und PDFs digital nutzen</h2>
+        <p>Viele Lehrbuecher und Arbeitsblatter werden als PDF bereitgestellt. Du kannst sie direkt in deiner Notiz-App importieren und mit Stift bearbeiten.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>PDF-Workflow</strong><ul><li>PDF aus Teams / Schulplattform speichern</li><li>In Notiz-App importieren (z.B. GoodNotes oder Samsung Notes)</li><li>Direkt mit Stift annotieren, unterstreichen, kommentieren</li><li>Automatisch gespeichert und in der Cloud gesichert</li></ul></div></div>
+        <h2>Optimale Fach-Struktur</h2>
+        <div class="ibox info"><span class="ibox-icon">&#128193;</span><div class="ibox-body"><strong>Empfohlene Struktur</strong><ul><li>&#128193; Schule 2025-26</li><li>&nbsp;&nbsp;&#128214; Deutsch (Notizbuch)</li><li>&nbsp;&nbsp;&#128214; Mathematik (Notizbuch)</li><li>&nbsp;&nbsp;&#128214; Biologie (Notizbuch)</li><li>&nbsp;&nbsp;&#128214; ...</li></ul></div></div>
+        <h2>Checkliste</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Notizbuch / Ordner pro Fach angelegt</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Aktuelle Unterrichtsmaterialien importiert</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Alte Notizen regelmaessig archivieren (nicht loeschen!)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Backup-Export einmal pro Woche (PDF/ZIP)</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#128241;",
+    title: "Empfohlene Apps",
+    tag: "Kapitel 4",
+    desc: "Die besten kostenlosen und kostenpflichtigen Apps fuer den Schulalltag.",
+    content: `
+      <div class="content-block">
+        <h2>Muss-have Apps fuer die Schule</h2>
+        <div class="app-grid">
+          <div class="app-card"><span class="app-icon">&#128172;</span><div class="app-info"><strong>Microsoft Teams</strong><span>Schulkommunikation, Aufgaben</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128203;</span><div class="app-info"><strong>OneNote</strong><span>Notizen und Mitschriften</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128196;</span><div class="app-info"><strong>Word / Google Docs</strong><span>Hausarbeiten tippen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128202;</span><div class="app-info"><strong>PowerPoint / Keynote</strong><span>Praesentationen erstellen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128270;</span><div class="app-info"><strong>Tolino / Kindle</strong><span>Digitale Buecher lesen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#127757;</span><div class="app-info"><strong>Wikipedia / Kiwix</strong><span>Recherche (offline)</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#128200;</span><div class="app-info"><strong>Desmos / GeoGebra</strong><span>Mathematik-Graphen</span><span class="app-free">Kostenlos</span></div></div>
+          <div class="app-card"><span class="app-icon">&#9203;</span><div class="app-info"><strong>Forest / Focus</strong><span>Fokus-Timer, Pomodoro</span><span class="app-free">Basis kostenlos</span></div></div>
+        </div>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Vorsicht</strong><p>Installiere nur Apps aus dem offiziellen App Store (Apple) oder Google Play Store. Keine Apps aus unbekannten Quellen.</p></div></div>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>KI-Tools</strong><p>ChatGPT und aehnliche Tools koennen beim Lernen helfen - aber nicht als Abschreibhilfe. Ergebnisse immer pruefen und Nutzung angeben.</p></div></div>
+      </div>`
+  },
+  {
+    icon: "&#127919;",
+    title: "Konzentration & Fokus",
+    tag: "Kapitel 5",
+    desc: "Ablenkungen ausschalten und produktiv lernen mit deinem Tablet.",
+    content: `
+      <div class="content-block">
+        ${toggleHTML}
+        <div class="ipad-only">
+          <h2>Fokus-Modus auf dem iPad</h2>
+          <p>Das iPad hat einen eingebauten Fokus-Modus. Richte den Schul-Fokus ein, der alle ablenkenden Apps und Benachrichtigungen blockiert.</p>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>iPad Fokus einrichten</strong><ul><li>Einstellungen > Fokus > Schule einrichten</li><li>Erlaubte Apps: nur Schul-Apps</li><li>Bildschirmzeit aktivieren fuer zusaetzliche Kontrolle</li><li>Nicht-stoeren waehrend Unterricht aktivieren</li></ul></div></div>
+        </div>
+        <div class="samsung-only" style="display:none">
+          <h2>Fokus-Modus auf Samsung</h2>
+          <p>Samsung bietet den Digitales Wohlbefinden Modus, der die Nutzung bestimmter Apps begrenzen kann.</p>
+          <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Samsung Fokus einrichten</strong><ul><li>Einstellungen > Digitales Wohlbefinden > Fokuszeit</li><li>Apps sperren waehrend der Lernzeit</li><li>Bildschirmzeit-Limits fuer Social Media setzen</li></ul></div></div>
+        </div>
+        <h2>Allgemeine Tipps</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Benachrichtigungen waehrend des Lernens deaktiviert</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Social-Media-Apps aus Startbildschirm entfernt</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Pomodoro-Technik anwenden (25 Min Lernen, 5 Min Pause)</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Handy waehrend der Lernzeit weglegen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Festes Lernumfeld schaffen (kein Bett!)</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#128247;",
+    title: "Kamera sinnvoll nutzen",
+    tag: "Kapitel 6",
+    desc: "Tafel fotografieren, QR-Codes scannen - und was du nicht fotografieren darfst.",
+    content: `
+      <div class="content-block">
+        <h2>Sinnvolle Nutzung der Kamera im Unterricht</h2>
+        <div class="ibox ok"><span class="ibox-icon">&#10003;</span><div class="ibox-body"><strong>Erlaubt</strong><ul><li>Tafel oder Whiteboard fotografieren (mit Erlaubnis der Lehrkraft)</li><li>QR-Codes fuer Schulmaterial scannen</li><li>Eigene Notizblaetter digitalisieren</li><li>Experimentaufbau fuer Dokumentation (mit Erlaubnis)</li></ul></div></div>
+        <div class="ibox warn"><span class="ibox-icon">&#10007;</span><div class="ibox-body"><strong>Verboten</strong><ul><li>Mitschueler oder Lehrkraefte ohne Erlaubnis fotografieren</li><li>Videos im Unterricht aufnehmen (ohne Erlaubnis)</li><li>Fotos in Gruppen-Chats oder Social Media hochladen</li><li>Fotos fuer Bloessstellen oder Mobbing nutzen</li></ul></div></div>
+        <h2>Das Recht am eigenen Bild</h2>
+        <p>Jede Person hat das Recht zu bestimmen, ob und wie Fotos von ihr verbreitet werden. Dieses Recht gilt auch fuer Mitschueler und Lehrkraefte. Verstoesse koennen rechtliche Folgen haben.</p>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>Merkregel</strong><p>Vor jedem Foto im Schulumfeld fragen: Habe ich die Erlaubnis aller zu sehenden Personen? Wenn nicht - kein Foto!</p></div></div>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Tafel nur mit Lehrkraft-Erlaubnis fotografieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Nie Personen ohne deren Einwilligung fotografieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine Schulfotos in sozialen Netzwerken teilen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Bei Unsicherheit: Fragen statt fotografieren</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#9993;",
+    title: "Kommunikation & Netiquette",
+    tag: "Kapitel 7",
+    desc: "Professionelle Kommunikation per Mail und auf der Schulplattform.",
+    content: `
+      <div class="content-block">
+        <h2>E-Mail an Lehrkraefte</h2>
+        <p>Eine gute Schulmail ist klar, hoeflich und vollstaendig. Sie hat immer einen aussagekraeftigen Betreff und deinen vollstaendigen Namen.</p>
+        <div class="ibox info"><span class="ibox-icon">&#9993;</span><div class="ibox-body"><strong>E-Mail Aufbau</strong><ul><li><strong>Betreff:</strong> Klasse_Thema (z.B. 11b_Frage zu HA Biologie)</li><li><strong>Anrede:</strong> Sehr geehrte Frau / Sehr geehrter Herr...</li><li><strong>Text:</strong> Praesize und hoeflich</li><li><strong>Gruss:</strong> Mit freundlichen Gruessen</li><li><strong>Absender:</strong> Vollstaendiger Name + Klasse</li></ul></div></div>
+        <h2>Teams und Schulplattformen</h2>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Teams-Knigge</strong><ul><li>Aufgaben-Deadlines im Kalender markieren</li><li>In Klassen-Chats sachlich und respektvoll bleiben</li><li>Keine privaten Informationen in Schulchats</li><li>Nicht in der Nacht oder am Wochenende schreiben (ausser dringend)</li></ul></div></div>
+        <h2>Netiquette-Checkliste</h2>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Immer hoeflich und respektvoll schreiben</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine Beleidigungen - auch keine "Witze"</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Schulmail-Adresse fuer Schulisches nutzen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Antwortzeiten von Lehrkraeften respektieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Keine sensiblen Infos in Gruppenchats teilen</li>
+        </ul>
+      </div>`
+  },
+  {
+    icon: "&#128295;",
+    title: "Pflege & Transport",
+    tag: "Kapitel 8",
+    desc: "Tablet und Zubehoer schuetzen, Akku pflegen und sicher transportieren.",
+    content: `
+      <div class="content-block">
+        <h2>Physischer Schutz</h2>
+        <p>Dein Tablet ist ein teures, empfindliches Geraet. Investiere in guten Schutz - das lohnt sich immer.</p>
+        <div class="ibox tip"><span class="ibox-icon">&#128161;</span><div class="ibox-body"><strong>Schutz-Essentials</strong><ul><li>Robustes Schutzcase (am besten mit Tastatur)</li><li>Displayschutzfolie (Glas oder Matt-Folie)</li><li>Stifthalter oder -ladecase</li><li>Neopren-Huelse fuer den Transport</li></ul></div></div>
+        <h2>Akku-Pflege</h2>
+        <p>Wie beim PC: Lithium-Akkus halten laenger, wenn sie nicht staendig voll- oder leergeladen werden.</p>
+        <ul class="checklist">
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Schutzcase vorhanden und genutzt</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Displayschutzfolie aufgebracht</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Ladestand zwischen 20-80% gehalten</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Tablet nicht in extremer Hitze oder Kaelte lassen</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>S Pen / Apple Pencil geladen und sicher verstaut</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Regelmaessige Software-Updates installieren</li>
+          <li onclick="toggleCheck(this)"><span class="cl-box"></span>Tablet nie unbeaufsichtigt in der Schule lassen</li>
+        </ul>
+        <div class="ibox warn"><span class="ibox-icon">&#9888;</span><div class="ibox-body"><strong>Bei Verlust oder Diebstahl</strong><p>Sofort "Mein iPad finden" oder "Mein Geraet finden" aktivieren und die Schule sowie Polizei informieren. Geraet aus der Ferne sperren oder loeschen!</p></div></div>
+        <div class="ibox info"><span class="ibox-icon">&#8505;</span><div class="ibox-body"><strong>Und jetzt: Quiz!</strong><p>Du hast alle 8 Kapitel des Tablet-Moduls abgeschlossen. Geh jetzt zum Abschlussquiz und hol dir deinen Fuehrerschein!</p></div></div>
+      </div>`
+  }
+];
+
+let current = 0;
+
+function toggleCheck(li) {
+  li.classList.toggle('checked');
+  const box = li.querySelector('.cl-box');
+  if (box) box.textContent = li.classList.contains('checked') ? String.fromCharCode(10003) : '';
+}
+
+function renderNav() {
+  const nav = document.getElementById('chapter-nav');
+  nav.innerHTML = '';
+  const done = countDone(MOD, CHAPTERS.length);
+  document.getElementById('prog-text').textContent = done + ' von ' + CHAPTERS.length + ' Kapiteln abgeschlossen';
+  document.getElementById('prog-bar').style.width = Math.round((done / CHAPTERS.length) * 100) + '%';
+  CHAPTERS.forEach((ch, i) => {
+    const li = document.createElement('li');
+    const isDone = isChapterDone(MOD, i);
+    li.className = (i === current ? 'active ' : '') + (isDone ? 'done' : '');
+    li.innerHTML = '<span class="ch-dot">' + (isDone ? String.fromCharCode(10003) : (i + 1)) + '</span>' + ch.icon + ' ' + ch.title;
+    li.addEventListener('click', () => { current = i; renderChapter(); renderNav(); });
+    nav.appendChild(li);
+  });
+}
+
+function renderChapter() {
+  const ch = CHAPTERS[current];
+  const area = document.getElementById('content-area');
+  const isDone = isChapterDone(MOD, current);
+  area.innerHTML = '<div class="ch-header fade-up">' +
+    '<span class="ch-tag">' + ch.tag + '</span>' +
+    '<h1>' + ch.icon + ' ' + ch.title + '</h1>' +
+    '<p>' + ch.desc + '</p>' +
+    '</div>' +
+    ch.content +
+    '<div class="ch-actions">' +
+    '<button class="btn btn-success" onclick="markDone()">' +
+    (isDone ? String.fromCharCode(10003) + ' Abgeschlossen' : String.fromCharCode(10003) + ' Kapitel abschliessen') +
+    '</button>' +
+    (current < CHAPTERS.length - 1 ? '<button class="btn btn-outline" onclick="nextChapter()">Naechstes Kapitel &rarr;</button>' : '') +
+    (current === CHAPTERS.length - 1 ? '<a href="quiz.html" class="btn btn-accent">Zum Abschlussquiz &rarr;</a>' : '') +
+    '</div>';
+  window.scrollTo(0, 0);
+}
+
+function markDone() {
+  saveChapterDone(MOD, current);
+  renderNav();
+  renderChapter();
+}
+
+function nextChapter() {
+  if (current < CHAPTERS.length - 1) { current++; renderChapter(); renderNav(); }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderNav();
+  renderChapter();
+});
+</script>
+</body>
+</html>

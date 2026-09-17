@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digitaler Führerschein – Amy Johnson Gymnasium</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
+  </a>
+  <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
+  <ul class="navbar-nav">
+    <li><a href="index.html" class="active">🏠 Start</a></li>
+    <li><a href="pc.html">💻 PC</a></li>
+    <li><a href="tablet.html">📱 Tablet</a></li>
+    <li><a href="quiz.html">📝 Quiz</a></li>
+    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="hero-logo">
+  <h1>Digitaler <span class="accent">Führerschein</span></h1>
+  <p>Lerne, dein digitales Gerät (PC oder Tablet) verantwortungsvoll, sicher und produktiv in der Oberstufe einzusetzen – und schalte deine Nutzungsgenehmigung frei!</p>
+  <div class="badge-row">
+    <span class="badge">📚 Oberstufe (Sek II)</span>
+    <span class="badge">💻 Windows 11</span>
+    <span class="badge">📱 iPad & Samsung</span>
+    <span class="badge">🔐 Zugangscode-Test</span>
+    <span class="badge">🏆 Offizielles Zertifikat</span>
+  </div>
+</section>
+
+<section class="device-section">
+  <div class="device-grid">
+    <a href="pc.html" class="device-card fade-up">
+      <div class="device-icon">💻</div>
+      <h2>PC / Laptop</h2>
+      <p>Windows 11 einrichten, Schulordner strukturieren, Office 365, Teams und fokussiertes Arbeiten.</p>
+      <div class="tag-list">
+        <span class="tag">Windows 11</span>
+        <span class="tag">Ordnerstruktur</span>
+        <span class="tag">Office 365 & Teams</span>
+        <span class="tag">Fokus-Modus</span>
+        <span class="tag">Datenschutz & KI</span>
+      </div>
+      <span class="btn btn-primary">PC-Modul starten &rarr;</span>
+    </a>
+    <a href="tablet.html" class="device-card fade-up" style="animation-delay:.15s">
+      <div class="device-icon">📱</div>
+      <h2>Tablet (iPad & Samsung)</h2>
+      <p>Notizen-Apps (GoodNotes / Samsung Notes), PDF-Annotation, Fächerorganisation und Tafelbilder.</p>
+      <div class="tag-list">
+        <span class="tag">iPad (GoodNotes 6)</span>
+        <span class="tag">Samsung Notes & S-Pen</span>
+        <span class="tag">PDF-Workflow</span>
+        <span class="tag">Kamera & Tafelrecht</span>
+        <span class="tag">Ablenkung & Fokus</span>
+      </div>
+      <span class="btn btn-primary">Tablet-Modul starten &rarr;</span>
+    </a>
+  </div>
+</section>
+
+<section class="how-section">
+  <h2 class="section-title">So erreichst du deinen digitalen Führerschein</h2>
+  <p class="section-sub">In 4 Schritten zum Nachweis für den Unterricht</p>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <h3>Gerät wählen</h3>
+      <p>Wähle Laptop oder Tablet je nachdem, was du im Unterricht nutzt.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <h3>8 Module durcharbeiten</h3>
+      <p>Praxisnahe Tipps, Checklisten und Software-Empfehlungen abhaken.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <h3>Quiz mit Code starten</h3>
+      <p>Code von der Lehrkraft eingeben und min. 70% der Fragen richtig beantworten.</p>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <h3>Zertifikat ausdrucken</h3>
+      <p>PDF generieren, unterschreiben lassen und Gerät im Unterricht nutzen!</p>
+    </div>
+  </div>
+</section>
+
+<section style="background:var(--bg);padding:3.5rem 2rem;text-align:center">
+  <h2 class="section-title">Schwerpunktthemen</h2>
+  <p class="section-sub">Kompetenzen für eine erfolgreiche und sichere Oberstufe</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.2rem;max-width:960px;margin:0 auto">
+    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
+      <div style="font-size:2rem;margin-bottom:.5rem">📂</div>
+      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Dateimanagement</strong>
+      <span style="font-size:.85rem;color:var(--text-sec)">Nie wieder verlorene Hausaufgaben: Struktur nach Schuljahr, Fach und Thema plus Cloud-Sync.</span>
+    </div>
+    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
+      <div style="font-size:2rem;margin-bottom:.5rem">✍️</div>
+      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Digitales Mitschreiben</strong>
+      <span style="font-size:.85rem;color:var(--text-sec)">GoodNotes, Samsung Notes & OneNote: Stiftnutzung, Durchsuchbarkeit und PDF-Skripte.</span>
+    </div>
+    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
+      <div style="font-size:2rem;margin-bottom:.5rem">🤖</div>
+      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">KI & Quellenkompetenz</strong>
+      <span style="font-size:.85rem;color:var(--text-sec)">ChatGPT und Co. als Lernassistenz statt Plagiat – Faktenprüfung und Quellentransparenz.</span>
+    </div>
+    <div style="background:white;border-radius:14px;padding:1.4rem;box-shadow:var(--shadow-sm);text-align:left">
+      <div style="font-size:2rem;margin-bottom:.5rem">⚖️</div>
+      <strong style="display:block;margin-bottom:.3rem;color:var(--primary)">Recht am Bild & Netiquette</strong>
+      <span style="font-size:.85rem;color:var(--text-sec)">Datenschutz, Tafelbilder, keine ungefragten Aufnahmen und respektvolle Mail-Kommunikation.</span>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p>© 2025 <strong style="color:rgba(255,255,255,.9)">Amy Johnson Gymnasium</strong> · Digitaler Führerschein (Oberstufe)</p>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

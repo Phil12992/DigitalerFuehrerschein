@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abschlussquiz – Digitaler Führerschein</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
+  </a>
+  <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
+  <ul class="navbar-nav">
+    <li><a href="index.html">🏠 Start</a></li>
+    <li><a href="pc.html">💻 PC</a></li>
+    <li><a href="tablet.html">📱 Tablet</a></li>
+    <li><a href="quiz.html" class="active">📝 Quiz</a></li>
+    <li><a href="certificate.html">🏅 Zertifikat</a></li>
+  </ul>
+</nav>
+
+<main class="quiz-wrap">
+  <!-- SCREEN: ZUGANGSCODE -->
+  <div id="screen-code" class="quiz-card fade-up">
+    <div class="code-icon">🔐</div>
+    <h1>Abschlussprüfung</h1>
+    <p>Der Abschlusstest schaltet dein Zertifikat frei. Bitte gib den Zugangscode deiner Lehrkraft ein:</p>
+    
+    <div class="code-row">
+      <input type="text" id="code-input" placeholder="CODE EINGEBEN" maxlength="15" autocomplete="off">
+      <button class="btn btn-primary" onclick="checkCode()">Test starten</button>
+    </div>
+    <p class="code-err" id="code-err">Ungültiger Zugangscode! Bitte wende dich an deine Lehrkraft.</p>
+    
+    <div class="ibox info" style="margin-top:2rem;text-align:left">
+      <span class="ibox-icon">ℹ️</span>
+      <div class="ibox-body">
+        <strong>Testbedingungen</strong>
+        <p>• 20 zufällig sortierte Fragen zu PC, Tablet, Datenschutz, KI und Schulregeln.<br>
+           • Mindestpunktzahl: <strong>70%</strong> zum Bestehen.<br>
+           • Nach erfolgreichem Abschluss kannst du dein Zertifikat sofort drucken.</p>
+      </div>
+    </div>
+    <div class="ibox tip" style="margin-top:0.75rem;text-align:left">
+      <span class="ibox-icon">💡</span>
+      <div class="ibox-body">
+        <strong>Tipp für Lehrkräfte / Testbetrieb:</strong>
+        <p>Der voreingestellte Code lautet <code>AJG2025</code> (kann in <code>js/quiz-data.js</code> angepasst werden).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: QUIZ LAUFEND -->
+  <div id="screen-quiz" class="quiz-card fade-up hidden">
+    <div class="quiz-prog-row">
+      <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="q-prog" style="width:0%"></div></div>
+      <span class="quiz-count" id="q-count">1 / 20</span>
+    </div>
+    <span class="q-cat" id="q-cat">Kategorie</span>
+    <h2 class="q-text" id="q-text" style="font-size:1.15rem;margin-bottom:1.2rem;"></h2>
+    <ul class="options" id="q-options"></ul>
+    <div class="q-feedback" id="q-feedback"></div>
+    <div class="q-nav">
+      <button class="btn btn-primary hidden" id="btn-next" onclick="nextQuestion()">Nächste Frage &rarr;</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: ERGEBNIS -->
+  <div id="screen-result" class="quiz-card fade-up hidden">
+    <div class="result-icon" id="res-icon"></div>
+    <div class="result-score" id="res-score"></div>
+    <div class="result-msg" id="res-msg"></div>
+    <div class="result-btns" id="res-btns"></div>
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2025 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+</footer>
+
+<script src="js/quiz-data.js"></script>
+<script src="js/app.js"></script>
+<script>
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+let questions = [];
+let current = 0;
+let score = 0;
+let answered = false;
+
+function checkCode(){
+  const val = document.getElementById("code-input").value.trim().toUpperCase();
+  if(val === QUIZ_ACCESS_CODE.toUpperCase()){
+    questions = shuffle(QUIZ_QUESTIONS);
+    document.getElementById("screen-code").classList.add("hidden");
+    document.getElementById("screen-quiz").classList.remove("hidden");
+    current = 0;
+    score = 0;
+    loadQuestion();
+  } else {
+    document.getElementById("code-err").style.display = "block";
+  }
+}
+
+document.getElementById("code-input").addEventListener("keydown", e => {
+  if(e.key === "Enter") checkCode();
+});
+
+function loadQuestion(){
+  answered = false;
+  const q = questions[current];
+  const total = questions.length;
+  
+  document.getElementById("q-prog").style.width = ((current / total) * 100) + "%";
+  document.getElementById("q-count").textContent = (current + 1) + " / " + total;
+  document.getElementById("q-cat").textContent = q.cat;
+  document.getElementById("q-text").textContent = q.q;
+  
+  const fb = document.getElementById("q-feedback");
+  fb.style.display = "none";
+  fb.className = "q-feedback";
+  document.getElementById("btn-next").classList.add("hidden");
+  
+  const ul = document.getElementById("q-options");
+  ul.innerHTML = "";
+  const letters = ["A", "B", "C", "D"];
+  
+  q.opts.forEach((opt, i) => {
+    const li = document.createElement("li");
+    li.className = "opt";
+    li.innerHTML = `<span class="opt-letter">${letters[i]}</span> <span>${opt}</span>`;
+    li.addEventListener("click", () => selectAnswer(i, q.correct, q.explain));
+    ul.appendChild(li);
+  });
+
+  if(current === questions.length - 1){
+    document.getElementById("btn-next").textContent = "Auswertung ansehen 📊";
+  } else {
+    document.getElementById("btn-next").textContent = "Nächste Frage &rarr;";
+  }
+}
+
+function selectAnswer(idx, correct, explain){
+  if(answered) return;
+  answered = true;
+  
+  const opts = document.querySelectorAll(".opt");
+  opts.forEach((o, i) => {
+    if(i === correct) o.classList.add("correct");
+    else if(i === idx && idx !== correct) o.classList.add("wrong");
+    o.style.cursor = "default";
+  });
+  
+  const fb = document.getElementById("q-feedback");
+  if(idx === correct){
+    score++;
+    fb.className = "q-feedback correct";
+    fb.textContent = "✅ Richtig! " + explain;
+  } else {
+    fb.className = "q-feedback wrong";
+    fb.textContent = "❌ Leider falsch. " + explain;
+  }
+  fb.style.display = "block";
+  document.getElementById("btn-next").classList.remove("hidden");
+}
+
+function nextQuestion(){
+  current++;
+  if(current >= questions.length){
+    showResult();
+  } else {
+    loadQuestion();
+  }
+}
+
+function showResult(){
+  document.getElementById("screen-quiz").classList.add("hidden");
+  const res = document.getElementById("screen-result");
+  res.classList.remove("hidden");
+  
+  const total = questions.length;
+  const pct = Math.round((score / total) * 100);
+  const passed = pct >= MIN_PASS_PERCENT;
+  
+  storeQuizPass(score, total);
+  
+  document.getElementById("res-icon").textContent = passed ? "🏆" : "❌";
+  document.getElementById("res-score").className = "result-score " + (passed ? "pass-score" : "fail-score");
+  document.getElementById("res-score").textContent = pct + "%";
+  
+  const msg = document.getElementById("res-msg");
+  msg.className = "result-msg " + (passed ? "pass" : "fail");
+  
+  if(passed){
+    msg.innerHTML = `<h2>Herzlichen Glückwunsch! Bestanden 🎉</h2>
+      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig beantwortet. Damit hast du alle Voraussetzungen für die Gerätenutzung in der Schule erfüllt.</p>`;
+  } else {
+    msg.innerHTML = `<h2>Leider nicht bestanden</h2>
+      <p>Du hast <strong>${score} von ${total}</strong> Fragen richtig. Zum Bestehen benötigst du mindestens <strong>${MIN_PASS_PERCENT}%</strong>. Wiederhole die Module und versuche es erneut!</p>`;
+  }
+  
+  const btns = document.getElementById("res-btns");
+  if(passed){
+    btns.innerHTML = `<a href="certificate.html" class="btn btn-accent btn-lg">🏅 Zum Führerschein-Zertifikat</a>
+                      <a href="index.html" class="btn btn-outline">Zur Startseite</a>`;
+  } else {
+    btns.innerHTML = `<button class="btn btn-primary btn-lg" onclick="restartQuiz()">🔄 Test wiederholen</button>
+                      <a href="index.html" class="btn btn-outline">Module nachlesen</a>`;
+  }
+}
+
+function restartQuiz(){
+  current = 0;
+  score = 0;
+  questions = shuffle(QUIZ_QUESTIONS);
+  document.getElementById("screen-result").classList.add("hidden");
+  document.getElementById("screen-quiz").classList.remove("hidden");
+  loadQuestion();
+}
+</script>
+</body>
+</html>

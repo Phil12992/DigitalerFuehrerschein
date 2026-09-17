@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zertifikat – Digitaler Führerschein</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<nav class="navbar no-print">
+  <a href="index.html" class="navbar-brand">
+    <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="navbar-logo">
+    <div class="navbar-title">Digitaler Führerschein <span>Amy Johnson Gymnasium</span></div>
+  </a>
+  <button class="hamburger" onclick="document.querySelector('.navbar-nav').classList.toggle('open')">&#9776;</button>
+  <ul class="navbar-nav">
+    <li><a href="index.html">🏠 Start</a></li>
+    <li><a href="pc.html">💻 PC</a></li>
+    <li><a href="tablet.html">📱 Tablet</a></li>
+    <li><a href="quiz.html">📝 Quiz</a></li>
+    <li><a href="certificate.html" class="active">🏅 Zertifikat</a></li>
+  </ul>
+</nav>
+
+<main class="cert-wrap no-print">
+  <div class="cert-setup-card fade-up" id="cert-form">
+    <div style="font-size:3.2rem;text-align:center;margin-bottom:.75rem">🏅</div>
+    <h1>Offizieller Digitaler Führerschein</h1>
+    <p>Trage deine Daten ein, um das personalisierte Führerschein-Zertifikat mit dem Logo des Amy Johnson Gymnasiums zu generieren.</p>
+    
+    <div class="form-row">
+      <label for="inp-name">Vor- und Nachname</label>
+      <input type="text" id="inp-name" placeholder="z.B. Anna Schmidt" autocomplete="name">
+    </div>
+    <div class="form-row">
+      <label for="inp-klasse">Jahrgangsstufe / Kurs / Klasse</label>
+      <input type="text" id="inp-klasse" placeholder="z.B. Q1 / Jahrgangsstufe 11">
+    </div>
+    <div class="form-row">
+      <label for="inp-device">Geprüftes Gerät / Modul</label>
+      <select id="inp-device">
+        <option value="Laptop / PC (Windows 11)">Laptop / PC (Windows 11)</option>
+        <option value="Tablet (Apple iPad / GoodNotes)">Tablet (Apple iPad / GoodNotes)</option>
+        <option value="Tablet (Samsung Galaxy Tab / Samsung Notes)">Tablet (Samsung Galaxy Tab / Samsung Notes)</option>
+        <option value="Universell (Laptop & Tablet)">Universell (Laptop & Tablet)</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <label for="inp-serial">Geräte-Modell / Kennung (optional)</label>
+      <input type="text" id="inp-serial" placeholder="z.B. Surface Laptop 5 oder iPad Air 5. Gen">
+    </div>
+
+    <button class="btn btn-accent btn-lg" style="width:100%;margin-top:1.2rem;justify-content:center" onclick="generateCert()">
+      🎓 Führerschein-Zertifikat erstellen
+    </button>
+  </div>
+</main>
+
+<!-- DRUCK- & ANZEIGE-BEREICH DES ZERTIFIKATS -->
+<div class="cert-print-area" id="cert-output" style="display:none">
+  <div class="certificate">
+    <div class="cert-header">
+      <img src="assets/logo.png" alt="Amy Johnson Gymnasium" class="cert-logo">
+      <div class="cert-seal">
+        <span style="font-size:1.6rem">🎓</span>
+        <span>AMY JOHNSON<br>GYMNASIUM</span>
+      </div>
+    </div>
+    <div class="cert-body">
+      <p class="cert-pre">Amy Johnson Gymnasium · Schuljahr 2025/2026</p>
+      <h1 class="cert-main">Digitaler <span>Führerschein</span></h1>
+      <p class="cert-sub">Hiermit wird bescheinigt, dass</p>
+      <div class="cert-name" id="cert-name-out">Vorname Nachname</div>
+      <p class="cert-sub" id="cert-klasse-out" style="font-weight:600;margin-bottom:0.8rem;color:var(--primary);"></p>
+      <div class="cert-device" id="cert-device-out">Geräte-Kategorie</div>
+      <p class="cert-desc" style="line-height:1.7;">
+        die Module zur Vorbereitung auf den digitalen Unterricht erfolgreich absolviert und die Abschlussprüfung
+        zu den Themen <strong>Datenschutz, Dateistrukturierung, Urheberrecht, KI-Nutzung &amp; Verhaltensregeln</strong> bestanden hat.<br>
+        Das Mitglied der Oberstufe ist berechtigt, das entsprechende Gerät im Unterricht zweckgebunden einzusetzen.
+      </p>
+      <p id="cert-serial-out" style="font-size:0.75rem;color:var(--text-sec);margin-top:0.6rem;"></p>
+    </div>
+    <div class="cert-foot">
+      <div>
+        <strong>Ausstellungsdatum:</strong><br>
+        <span id="cert-date-out">–</span>
+      </div>
+      <div style="text-align:center">
+        <div style="border-top:1.5px dashed #A0AEC0;width:180px;margin:0 auto 0.4rem;"></div>
+        <span>Unterschrift Schulleitung / Fachlehrkraft</span>
+      </div>
+      <div style="text-align:right">
+        <strong>Amy Johnson Gymnasium</strong><br>
+        <span style="color:#718096">Gültig für die gymnasiale Oberstufe</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin:1.5rem 0 3rem" class="no-print">
+    <button class="btn btn-primary btn-lg" onclick="window.print()">🖨️ Jetzt Drucken / Als PDF speichern</button>
+    <button class="btn btn-outline" style="margin-left:.75rem" onclick="resetForm()">✏️ Angaben bearbeiten</button>
+    <a href="index.html" class="btn btn-outline" style="margin-left:.75rem">🏠 Zurück zur Startseite</a>
+  </div>
+</div>
+
+<footer class="footer no-print">
+  <p>© 2025 Amy Johnson Gymnasium · Digitaler Führerschein</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+function generateCert(){
+  const name   = document.getElementById("inp-name").value.trim();
+  const klasse = document.getElementById("inp-klasse").value.trim();
+  const device = document.getElementById("inp-device").value;
+  const serial = document.getElementById("inp-serial").value.trim();
+
+  if(!name){
+    alert("Bitte gib deinen Namen ein.");
+    return;
+  }
+
+  document.getElementById("cert-name-out").textContent   = name;
+  document.getElementById("cert-klasse-out").textContent = klasse ? "Klasse / Jahrgangsstufe: " + klasse : "Oberstufe";
+  document.getElementById("cert-device-out").textContent = "Zugelassenes Gerät: " + device;
+  document.getElementById("cert-serial-out").textContent = serial ? "Gerätekennung: " + serial : "";
+
+  const now = new Date();
+  document.getElementById("cert-date-out").textContent = now.toLocaleDateString("de-DE", {day:"2-digit", month:"long", year:"numeric"});
+
+  document.getElementById("cert-form").style.display   = "none";
+  document.getElementById("cert-output").style.display = "block";
+  window.scrollTo(0, 0);
+}
+
+function resetForm(){
+  document.getElementById("cert-form").style.display   = "block";
+  document.getElementById("cert-output").style.display = "none";
+}
+</script>
+</body>
+</html>
